@@ -57,12 +57,24 @@ namespace Dust.Language.Compiler
         switch (@operator)
         {
           case BinaryOperatorType.PLUS:
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
+              return (int) left + (int) right;
+
             return Convert.ToSingle(left) + Convert.ToSingle(right);
           case BinaryOperatorType.MINUS:
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
+              return (int) left - (int) right;
+
             return Convert.ToSingle(left) - Convert.ToSingle(right);
           case BinaryOperatorType.TIMES:
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
+              return (int) left * (int) right;
+
             return Convert.ToSingle(left) * Convert.ToSingle(right);
           case BinaryOperatorType.DIVIDE:
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
+              return (int) left / (int) right;
+
             return Convert.ToSingle(left) / Convert.ToSingle(right);
         }
       }
@@ -111,12 +123,24 @@ namespace Dust.Language.Compiler
         switch (@operator)
         {
           case UnaryOperatorType.PLUS_PLUS:
+            if (DustType.GetDustType(value) == DustType.Int)
+              return (int) value + 1;
+
             return Convert.ToSingle(value) + 1;
           case UnaryOperatorType.MINUS_MINUS:
+            if (DustType.GetDustType(value) == DustType.Int)
+              return (int) value - 1;
+
             return Convert.ToSingle(value) - 1;
           case UnaryOperatorType.TIMES_TIMES:
+            if (DustType.GetDustType(value) == DustType.Int)
+              return Math.Pow((int) value, 2);
+
             return Math.Pow(Convert.ToSingle(value), 2);
           case UnaryOperatorType.DIVIDE_DIVIDE:
+            if (DustType.GetDustType(value) == DustType.Int)
+              return Math.Sqrt((int) value);
+
             return Math.Sqrt(Convert.ToSingle(value));
         }
       }
