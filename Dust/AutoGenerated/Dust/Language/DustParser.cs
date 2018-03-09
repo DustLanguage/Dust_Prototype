@@ -777,7 +777,9 @@ public partial class DustParser : Parser {
 				Context = _localctx;
 				_prevctx = _localctx;
 				State = 67; Match(T__2);
-				State = 68; expression(21);
+				{
+				State = 68; expression(0);
+				}
 				}
 				break;
 			case T__30:
@@ -2456,7 +2458,7 @@ public partial class DustParser : Parser {
 		'\x2', '@', '\x41', '\b', '\x4', '\x1', '\x2', '\x41', '\x42', '\a', '\x3', 
 		'\x2', '\x2', '\x42', '\x43', '\x5', '\x6', '\x4', '\x2', '\x43', '\x44', 
 		'\a', '\x4', '\x2', '\x2', '\x44', 'M', '\x3', '\x2', '\x2', '\x2', '\x45', 
-		'\x46', '\a', '\x5', '\x2', '\x2', '\x46', 'M', '\x5', '\x6', '\x4', '\x17', 
+		'\x46', '\a', '\x5', '\x2', '\x2', '\x46', 'M', '\x5', '\x6', '\x4', '\x2', 
 		'G', 'M', '\x5', '*', '\x16', '\x2', 'H', 'M', '\x5', '&', '\x14', '\x2', 
 		'I', 'J', '\a', '\x16', '\x2', '\x2', 'J', 'M', '\x5', '\x6', '\x4', '\x4', 
 		'K', 'M', '\x5', '(', '\x15', '\x2', 'L', '@', '\x3', '\x2', '\x2', '\x2', 

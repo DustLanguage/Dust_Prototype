@@ -29,7 +29,7 @@ statement
 expression
     : '(' expression ')' # ExpressionExpression
     | expression '(' parameters ')' # CallExpression
-    | 'typeof' expression # TypeOfExpression
+    | 'typeof' (expression) # TypeOfExpression
     | expression ('=' expression) # AssignmentExpression
     | arrayLiteral # ArrayLiteralExpression
     | identifierName # IdentifierExpression

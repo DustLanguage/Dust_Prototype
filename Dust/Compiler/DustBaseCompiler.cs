@@ -61,6 +61,8 @@ namespace Dust.Language.Compiler
           return CompileLiteralExpression(expression);
         case AssignmentExpression expression:
           return CompileAssignmentExpression(expression);
+        case TypeOfExpression expression:
+          return CompileTypeOfExpression(expression);
       }
 
       return default(T);
@@ -88,6 +90,7 @@ namespace Dust.Language.Compiler
     protected abstract T CompileIdentifierExpression(IdentifierExpression expression);
     protected abstract T CompileLiteralExpression(LiteralExpression expression);
     protected abstract T CompileAssignmentExpression(AssignmentExpression expression);
+    protected abstract T CompileTypeOfExpression(TypeOfExpression expression);
 
     #endregion
 

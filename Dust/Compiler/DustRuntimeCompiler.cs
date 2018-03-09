@@ -41,6 +41,13 @@ namespace Dust.Language.Compiler
       return value;
     }
 
+    protected override object CompileTypeOfExpression(TypeOfExpression expression)
+    {
+      object value = CompileExpression(expression.Expression);
+
+      return DustType.GetDustType(value);
+    }
+
     protected override object CompileArrayExpression(ArrayExpression expression)
     {
       throw new NotImplementedException();

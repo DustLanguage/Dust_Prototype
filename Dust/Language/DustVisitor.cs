@@ -153,6 +153,13 @@ namespace Dust.Language
       return property;
     }
 
+    public override Node VisitTypeOfExpression(DustParser.TypeOfExpressionContext context)
+    {
+      Expression expression = (Expression) Visit(context.expression());
+
+      return new TypeOfExpression(expression);
+    }
+
     private BinaryExpression CreateBinaryExpression(DustParser.ExpressionContext context, DustParser.ExpressionContext leftContext, string @operator, DustParser.ExpressionContext rightContext)
     {
       Expression left = (Expression) Visit(leftContext);
