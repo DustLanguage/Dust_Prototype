@@ -64,7 +64,7 @@ public partial class DustParser : Parser {
 
 	private static readonly string[] _LiteralNames = {
 		null, "'('", "')'", "'typeof'", "'='", "'.'", "'+'", "'++'", "'-'", "'--'", 
-		"'*'", "'**'", "'/'", "'//'", "'=='", "'!='", "'>'", "'<'", "'>='", "'<='", 
+		"'*'", "'**'", "'/'", "'//'", "'=='", "'!='", "'>'", "'>='", "'<'", "'<='", 
 		"'!'", "'let'", "'const'", "'return'", "'{'", "'}'", "'public'", "'private'", 
 		"','", "'true'", "'false'", "'['", "']'", null, null, "';'"
 	};
@@ -917,7 +917,7 @@ public partial class DustParser : Parser {
 						break;
 					case 9:
 						{
-						_localctx = new SmallerBinaryExpressionContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new BiggerEqualBinaryExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
 						State = 100;
 						if (!(Precpred(Context, 5))) throw new FailedPredicateException(this, "Precpred(Context, 5)");
@@ -927,7 +927,7 @@ public partial class DustParser : Parser {
 						break;
 					case 10:
 						{
-						_localctx = new BiggerEqualBinaryExpressionContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new SmallerBinaryExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
 						State = 103;
 						if (!(Precpred(Context, 4))) throw new FailedPredicateException(this, "Precpred(Context, 4)");

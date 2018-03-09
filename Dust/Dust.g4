@@ -15,7 +15,7 @@ PreProcessorDirective: '##' .*?;
 
 FloatLiteral: [0-9]+'.'[0-9]+;
 IntLiteral: [0-9]+;
-StringLiteral: ('"'|'\'')UnicodeCharacter*('"'|'\'');
+StringLiteral: ('"'|'\'')UnicodeSymbol*('"'|'\'');
 //CharLiteral: ('"'|'\'')UnicodeCharacter('"'|'\'');
 
 module: (statement eos)*;
@@ -45,8 +45,8 @@ expression
     | expression '==' expression # EqualBinaryExpression
     | expression '!=' expression # NotEqualBinaryExpression
     | expression '>' expression # BiggerBinaryExpression
-    | expression '<' expression # SmallerBinaryExpression
     | expression '>=' expression # BiggerEqualBinaryExpression
+    | expression '<' expression # SmallerBinaryExpression
     | expression '<=' expression # SmallerEqualBinaryExpression
     | '!' expression # BangUnaryExpression
     | literal # LiteralExpression;
@@ -118,6 +118,10 @@ fragment IdentifierStart
     
 fragment IdentifierPart 
     : IdentifierStart
+    | UnicodeSymbol;
+    
+fragment UnicodeSymbol
+    : UnicodeCharacter
     | UnicodeCombiningMark
     | UnicodeDigit
     | UnicodeConnectorPunctuation
