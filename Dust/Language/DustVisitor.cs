@@ -160,6 +160,17 @@ namespace Dust.Language
 
       BinaryOperatorType operatorType = BinaryOperatorTypeHelper.FromString(@operator.ToString());
 
+      switch (operatorType)
+      {
+        case BinaryOperatorType.EQUAL:
+        case BinaryOperatorType.NOT_EQUAL:
+        case BinaryOperatorType.BIGGER:
+        case BinaryOperatorType.BIGGER_EQUAL:
+        case BinaryOperatorType.SMALLER:
+        case BinaryOperatorType.SMALLER_EQUAL:
+          return new BinaryExpression(left, operatorType, right);
+      }
+
       if (left.Type == DustType.Number && right.Type == DustType.Number)
       {
         switch (operatorType)

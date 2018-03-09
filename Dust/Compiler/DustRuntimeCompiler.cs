@@ -52,6 +52,102 @@ namespace Dust.Language.Compiler
       object right = CompileExpression(expression.Right);
       BinaryOperatorType @operator = expression.Operator;
 
+      switch (@operator)
+      {
+        case BinaryOperatorType.EQUAL:
+          return left.Equals(right);
+        case BinaryOperatorType.NOT_EQUAL:
+          return !left.Equals(right);
+        case BinaryOperatorType.BIGGER:
+          if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
+          {
+            return Convert.ToSingle(left) > Convert.ToSingle(right);
+          }
+
+          if ((DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int) && (DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int))
+          {
+            if (DustType.GetDustType(left) == DustType.Int)
+            {
+              return (int) left > ((string) right).Length;
+            }
+
+            if (DustType.GetDustType(right) == DustType.Int)
+            {
+              return ((string) left).Length > (int) right;
+            }
+
+            return Convert.ToSingle(left) > Convert.ToSingle(right);
+          }
+
+          break;
+        case BinaryOperatorType.BIGGER_EQUAL:
+          if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
+          {
+            return Convert.ToSingle(left) >= Convert.ToSingle(right);
+          }
+
+          if ((DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int) && (DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int))
+          {
+            if (DustType.GetDustType(left) == DustType.Int)
+            {
+              return (int) left >= ((string) right).Length;
+            }
+
+            if (DustType.GetDustType(right) == DustType.Int)
+            {
+              return ((string) left).Length >= (int) right;
+            }
+
+            return Convert.ToSingle(left) >= Convert.ToSingle(right);
+          }
+
+          break;
+        case BinaryOperatorType.SMALLER:
+          if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
+          {
+            return Convert.ToSingle(left) < Convert.ToSingle(right);
+          }
+
+          if ((DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int) && (DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int))
+          {
+            if (DustType.GetDustType(left) == DustType.Int)
+            {
+              return (int) left < ((string) right).Length;
+            }
+
+            if (DustType.GetDustType(right) == DustType.Int)
+            {
+              return ((string) left).Length < (int) right;
+            }
+
+            return Convert.ToSingle(left) < Convert.ToSingle(right);
+          }
+
+          break;
+        case BinaryOperatorType.SMALLER_EQUAL:
+          if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
+          {
+            return Convert.ToSingle(left) <= Convert.ToSingle(right);
+          }
+
+          if ((DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int) && (DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int))
+          {
+            if (DustType.GetDustType(left) == DustType.Int)
+            {
+              return (int) left <= ((string) right).Length;
+            }
+
+            if (DustType.GetDustType(right) == DustType.Int)
+            {
+              return ((string) left).Length <= (int) right;
+            }
+
+            return Convert.ToSingle(left) <= Convert.ToSingle(right);
+          }
+
+          break;
+      }
+
       if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
       {
         switch (@operator)
