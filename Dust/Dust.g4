@@ -27,7 +27,7 @@ statement
     | returnStatement;
 
 expression
-    : '(' expression ')' # ExpressionExpression
+    : '(' expression ')' # GroupExpression
     | expression '(' parameters ')' # CallExpression
     | 'typeof' (expression) # TypeOfExpression
     | expression ('=' expression) # AssignmentExpression

@@ -529,6 +529,25 @@ public partial class DustParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
+	public partial class GroupExpressionContext : ExpressionContext {
+		public ExpressionContext expression() {
+			return GetRuleContext<ExpressionContext>(0);
+		}
+		public GroupExpressionContext(ExpressionContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IDustListener typedListener = listener as IDustListener;
+			if (typedListener != null) typedListener.EnterGroupExpression(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IDustListener typedListener = listener as IDustListener;
+			if (typedListener != null) typedListener.ExitGroupExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IDustVisitor<TResult> typedVisitor = visitor as IDustVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGroupExpression(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
 	public partial class MultiplicationBinaryExpressionContext : ExpressionContext {
 		public ExpressionContext[] expression() {
 			return GetRuleContexts<ExpressionContext>();
@@ -699,25 +718,6 @@ public partial class DustParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
-	public partial class ExpressionExpressionContext : ExpressionContext {
-		public ExpressionContext expression() {
-			return GetRuleContext<ExpressionContext>(0);
-		}
-		public ExpressionExpressionContext(ExpressionContext context) { CopyFrom(context); }
-		public override void EnterRule(IParseTreeListener listener) {
-			IDustListener typedListener = listener as IDustListener;
-			if (typedListener != null) typedListener.EnterExpressionExpression(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IDustListener typedListener = listener as IDustListener;
-			if (typedListener != null) typedListener.ExitExpressionExpression(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IDustVisitor<TResult> typedVisitor = visitor as IDustVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitExpressionExpression(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
 	public partial class CallExpressionContext : ExpressionContext {
 		public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
@@ -762,7 +762,7 @@ public partial class DustParser : Parser {
 			switch (TokenStream.LA(1)) {
 			case T__0:
 				{
-				_localctx = new ExpressionExpressionContext(_localctx);
+				_localctx = new GroupExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
 
@@ -804,7 +804,9 @@ public partial class DustParser : Parser {
 				Context = _localctx;
 				_prevctx = _localctx;
 				State = 71; Match(T__19);
-				State = 72; expression(2);
+				{
+				State = 72; expression(0);
+				}
 				}
 				break;
 			case T__5:
@@ -2460,7 +2462,7 @@ public partial class DustParser : Parser {
 		'\a', '\x4', '\x2', '\x2', '\x44', 'M', '\x3', '\x2', '\x2', '\x2', '\x45', 
 		'\x46', '\a', '\x5', '\x2', '\x2', '\x46', 'M', '\x5', '\x6', '\x4', '\x2', 
 		'G', 'M', '\x5', '*', '\x16', '\x2', 'H', 'M', '\x5', '&', '\x14', '\x2', 
-		'I', 'J', '\a', '\x16', '\x2', '\x2', 'J', 'M', '\x5', '\x6', '\x4', '\x4', 
+		'I', 'J', '\a', '\x16', '\x2', '\x2', 'J', 'M', '\x5', '\x6', '\x4', '\x2', 
 		'K', 'M', '\x5', '(', '\x15', '\x2', 'L', '@', '\x3', '\x2', '\x2', '\x2', 
 		'L', '\x45', '\x3', '\x2', '\x2', '\x2', 'L', 'G', '\x3', '\x2', '\x2', 
 		'\x2', 'L', 'H', '\x3', '\x2', '\x2', '\x2', 'L', 'I', '\x3', '\x2', '\x2', 

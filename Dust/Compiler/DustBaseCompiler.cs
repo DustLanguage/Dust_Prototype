@@ -39,7 +39,6 @@ namespace Dust.Language.Compiler
         case PropertyDeclaration statement:
           return CompilePropertyDeclaration(statement);
       }
-      
       return default(T);
     }
 
@@ -63,6 +62,8 @@ namespace Dust.Language.Compiler
           return CompileAssignmentExpression(expression);
         case TypeOfExpression expression:
           return CompileTypeOfExpression(expression);
+        case GroupExpression expression:
+          return CompileGroupExpression(expression);
       }
 
       return default(T);
@@ -91,6 +92,7 @@ namespace Dust.Language.Compiler
     protected abstract T CompileLiteralExpression(LiteralExpression expression);
     protected abstract T CompileAssignmentExpression(AssignmentExpression expression);
     protected abstract T CompileTypeOfExpression(TypeOfExpression expression);
+    protected abstract T CompileGroupExpression(GroupExpression expression);
 
     #endregion
 

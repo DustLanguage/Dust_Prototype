@@ -53,6 +53,13 @@ namespace Dust.Language.Compiler
       throw new NotImplementedException();
     }
 
+    protected override object CompileGroupExpression(GroupExpression expression)
+    {
+      object value = CompileExpression(expression.Expression);
+
+      return value;
+    }
+
     protected override object CompileBinaryExpression(BinaryExpression expression)
     {
       object left = CompileExpression(expression.Left);

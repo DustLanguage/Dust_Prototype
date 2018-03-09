@@ -160,6 +160,13 @@ namespace Dust.Language
       return new TypeOfExpression(expression);
     }
 
+    public override Node VisitGroupExpression(DustParser.GroupExpressionContext context)
+    {
+      Expression expression = (Expression) Visit(context.expression());
+      
+      return new GroupExpression(expression);
+    }
+
     private BinaryExpression CreateBinaryExpression(DustParser.ExpressionContext context, DustParser.ExpressionContext leftContext, string @operator, DustParser.ExpressionContext rightContext)
     {
       Expression left = (Expression) Visit(leftContext);

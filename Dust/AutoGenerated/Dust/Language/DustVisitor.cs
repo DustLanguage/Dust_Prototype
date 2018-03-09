@@ -136,6 +136,13 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitBiggerBinaryExpression([NotNull] DustParser.BiggerBinaryExpressionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>GroupExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGroupExpression([NotNull] DustParser.GroupExpressionContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>MultiplicationBinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
@@ -191,13 +198,6 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>ExpressionExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitExpressionExpression([NotNull] DustParser.ExpressionExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>CallExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.

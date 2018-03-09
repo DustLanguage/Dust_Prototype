@@ -208,6 +208,18 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitBiggerBinaryExpression([NotNull] DustParser.BiggerBinaryExpressionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>GroupExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGroupExpression([NotNull] DustParser.GroupExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>GroupExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGroupExpression([NotNull] DustParser.GroupExpressionContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>MultiplicationBinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
@@ -303,18 +315,6 @@ public interface IDustListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>ExpressionExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterExpressionExpression([NotNull] DustParser.ExpressionExpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>ExpressionExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitExpressionExpression([NotNull] DustParser.ExpressionExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>CallExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.

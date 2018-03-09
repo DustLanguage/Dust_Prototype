@@ -242,6 +242,20 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitBiggerBinaryExpression([NotNull] DustParser.BiggerBinaryExpressionContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by the <c>GroupExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterGroupExpression([NotNull] DustParser.GroupExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>GroupExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitGroupExpression([NotNull] DustParser.GroupExpressionContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by the <c>MultiplicationBinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -353,20 +367,6 @@ public partial class DustBaseListener : IDustListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by the <c>ExpressionExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterExpressionExpression([NotNull] DustParser.ExpressionExpressionContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>ExpressionExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitExpressionExpression([NotNull] DustParser.ExpressionExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by the <c>CallExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
