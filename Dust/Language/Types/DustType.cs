@@ -6,7 +6,7 @@ namespace Dust.Language
 {
   public class DustType : IEquatable<DustType>
   {
-    public static DustType Object => new DustType("object", root: true);
+    public static DustType Object => new DustType("object", isRoot: true);
     public static DustType Number => new DustType("number", Object, true);
     public static DustType String => new DustType("string", Object);
     public static DustType Bool => new DustType("bool", Object);
@@ -17,22 +17,34 @@ namespace Dust.Language
     public string Name { get; }
     public DustType Parent { get; }
     public DustType Root { get; }
+    public bool IsRoot { get; }
 
-    public DustType(string name, DustType parent = null, bool root = false /*, string[] binaryOperators = null*/)
+    public DustType(string name, DustType parent = null, bool isRoot = false)
     {
       Name = name;
       Parent = parent;
-      Root = root ? this : parent.Root;
+      Root = isRoot ? this : parent.Root;
+      IsRoot = isRoot;
     }
 
     public static bool operator ==(DustType left, DustType right)
     {
-      return left.Name == right.Name || left.Root.Name == right.Name || left.Root.Name == right.Root.Name || left.Name == right.Root.Name;
+      if (right.IsRoot)
+      {
+        return left.Name == right.Name || left.Root.Name == right.Name || left.Root.Name == right.Root.Name || left.Name == right.Root.Name;
+      }
+
+      return left.Name == right.Name;
     }
 
     public static bool operator !=(DustType left, DustType right)
     {
-      return left.Name != right.Name || left.Root.Name != right.Name || left.Root.Name != right.Root.Name || left.Name != right.Root.Name;
+      if (right.IsRoot)
+      {
+        return left.Name != right.Name || left.Root.Name != right.Name || left.Root.Name != right.Root.Name || left.Name != right.Root.Name;
+      }
+
+      return left.Name != right.Name;
     }
 
     public static DustType GetDustType(object @object)

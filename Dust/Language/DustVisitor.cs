@@ -91,6 +91,11 @@ namespace Dust.Language
       return CreateUnaryExpression(context, context.expression(), "//");
     }
 
+    public override Node VisitBangUnaryExpression(DustParser.BangUnaryExpressionContext context)
+    {
+      return CreateUnaryExpression(context, context.expression(), "!");
+    }
+
     public override Node VisitEqualBinaryExpression(DustParser.EqualBinaryExpressionContext context)
     {
       return CreateBinaryExpression(context, context.expression(0), "==", context.expression(1));
@@ -153,12 +158,37 @@ namespace Dust.Language
       return property;
     }
 
+    public override Node VisitTypeOfExpression(DustParser.TypeOfExpressionContext context)
+    {
+      Expression expression = (Expression) Visit(context.expression());
+
+      return new TypeOfExpression(expression);
+    }
+
+    public override Node VisitGroupExpression(DustParser.GroupExpressionContext context)
+    {
+      Expression expression = (Expression) Visit(context.expression());
+      
+      return new GroupExpression(expression);
+    }
+
     private BinaryExpression CreateBinaryExpression(DustParser.ExpressionContext context, DustParser.ExpressionContext leftContext, string @operator, DustParser.ExpressionContext rightContext)
     {
       Expression left = (Expression) Visit(leftContext);
       Expression right = (Expression) Visit(rightContext);
 
       BinaryOperatorType operatorType = BinaryOperatorTypeHelper.FromString(@operator.ToString());
+
+      switch (operatorType)
+      {
+        case BinaryOperatorType.EQUAL:
+        case BinaryOperatorType.NOT_EQUAL:
+        case BinaryOperatorType.BIGGER:
+        case BinaryOperatorType.BIGGER_EQUAL:
+        case BinaryOperatorType.SMALLER:
+        case BinaryOperatorType.SMALLER_EQUAL:
+          return new BinaryExpression(left, operatorType, right);
+      }
 
       if (left.Type == DustType.Number && right.Type == DustType.Number)
       {
@@ -218,6 +248,15 @@ namespace Dust.Language
           case UnaryOperatorType.MINUS_MINUS:
           case UnaryOperatorType.TIMES_TIMES:
           case UnaryOperatorType.DIVIDE_DIVIDE:
+            return new UnaryExpression(expression, operatorType);
+        }
+      }
+
+      if (expression.Type == DustType.Bool)
+      {
+        switch (operatorType)
+        {
+          case UnaryOperatorType.BANG:
             return new UnaryExpression(expression, operatorType);
         }
       }

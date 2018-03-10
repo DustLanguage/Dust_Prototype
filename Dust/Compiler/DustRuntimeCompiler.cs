@@ -41,9 +41,23 @@ namespace Dust.Language.Compiler
       return value;
     }
 
+    protected override object CompileTypeOfExpression(TypeOfExpression expression)
+    {
+      object value = CompileExpression(expression.Expression);
+
+      return DustType.GetDustType(value);
+    }
+
     protected override object CompileArrayExpression(ArrayExpression expression)
     {
       throw new NotImplementedException();
+    }
+
+    protected override object CompileGroupExpression(GroupExpression expression)
+    {
+      object value = CompileExpression(expression.Expression);
+
+      return value;
     }
 
     protected override object CompileBinaryExpression(BinaryExpression expression)
@@ -52,17 +66,125 @@ namespace Dust.Language.Compiler
       object right = CompileExpression(expression.Right);
       BinaryOperatorType @operator = expression.Operator;
 
+      switch (@operator)
+      {
+        case BinaryOperatorType.EQUAL:
+          return left.Equals(right);
+        case BinaryOperatorType.NOT_EQUAL:
+          return !left.Equals(right);
+        case BinaryOperatorType.BIGGER:
+          if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
+          {
+            return Convert.ToSingle(left) > Convert.ToSingle(right);
+          }
+
+          if ((DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int) && (DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int))
+          {
+            if (DustType.GetDustType(left) == DustType.Int)
+            {
+              return (int) left > ((string) right).Length;
+            }
+
+            if (DustType.GetDustType(right) == DustType.Int)
+            {
+              return ((string) left).Length > (int) right;
+            }
+
+            return Convert.ToSingle(left) > Convert.ToSingle(right);
+          }
+
+          break;
+        case BinaryOperatorType.BIGGER_EQUAL:
+          if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
+          {
+            return Convert.ToSingle(left) >= Convert.ToSingle(right);
+          }
+
+          if ((DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int) && (DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int))
+          {
+            if (DustType.GetDustType(left) == DustType.Int)
+            {
+              return (int) left >= ((string) right).Length;
+            }
+
+            if (DustType.GetDustType(right) == DustType.Int)
+            {
+              return ((string) left).Length >= (int) right;
+            }
+
+            return Convert.ToSingle(left) >= Convert.ToSingle(right);
+          }
+
+          break;
+        case BinaryOperatorType.SMALLER:
+          if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
+          {
+            return Convert.ToSingle(left) < Convert.ToSingle(right);
+          }
+
+          if ((DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int) && (DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int))
+          {
+            if (DustType.GetDustType(left) == DustType.Int)
+            {
+              return (int) left < ((string) right).Length;
+            }
+
+            if (DustType.GetDustType(right) == DustType.Int)
+            {
+              return ((string) left).Length < (int) right;
+            }
+
+            return Convert.ToSingle(left) < Convert.ToSingle(right);
+          }
+
+          break;
+        case BinaryOperatorType.SMALLER_EQUAL:
+          if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
+          {
+            return Convert.ToSingle(left) <= Convert.ToSingle(right);
+          }
+
+          if ((DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int) && (DustType.GetDustType(right) == DustType.String || DustType.GetDustType(right) == DustType.Int))
+          {
+            if (DustType.GetDustType(left) == DustType.Int)
+            {
+              return (int) left <= ((string) right).Length;
+            }
+
+            if (DustType.GetDustType(right) == DustType.Int)
+            {
+              return ((string) left).Length <= (int) right;
+            }
+
+            return Convert.ToSingle(left) <= Convert.ToSingle(right);
+          }
+
+          break;
+      }
+
       if (DustType.GetDustType(left) == DustType.Number && DustType.GetDustType(right) == DustType.Number)
       {
         switch (@operator)
         {
           case BinaryOperatorType.PLUS:
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
+              return (int) left + (int) right;
+
             return Convert.ToSingle(left) + Convert.ToSingle(right);
           case BinaryOperatorType.MINUS:
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
+              return (int) left - (int) right;
+
             return Convert.ToSingle(left) - Convert.ToSingle(right);
           case BinaryOperatorType.TIMES:
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
+              return (int) left * (int) right;
+
             return Convert.ToSingle(left) * Convert.ToSingle(right);
           case BinaryOperatorType.DIVIDE:
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
+              return (int) left / (int) right;
+
             return Convert.ToSingle(left) / Convert.ToSingle(right);
         }
       }
@@ -111,16 +233,40 @@ namespace Dust.Language.Compiler
         switch (@operator)
         {
           case UnaryOperatorType.PLUS_PLUS:
+            if (DustType.GetDustType(value) == DustType.Int)
+              return (int) value + 1;
+
             return Convert.ToSingle(value) + 1;
           case UnaryOperatorType.MINUS_MINUS:
+            if (DustType.GetDustType(value) == DustType.Int)
+              return (int) value - 1;
+
             return Convert.ToSingle(value) - 1;
           case UnaryOperatorType.TIMES_TIMES:
+            if (DustType.GetDustType(value) == DustType.Int)
+              return Math.Pow((int) value, 2);
+
             return Math.Pow(Convert.ToSingle(value), 2);
           case UnaryOperatorType.DIVIDE_DIVIDE:
+            if (DustType.GetDustType(value) == DustType.Int)
+              return Math.Sqrt((int) value);
+
             return Math.Sqrt(Convert.ToSingle(value));
         }
       }
 
+      if (DustType.GetDustType(value) == DustType.Bool)
+      {
+        switch (@operator)
+        {
+          case UnaryOperatorType.BANG:
+            if (DustType.GetDustType(value) == DustType.Bool)
+              return !(bool) value;
+
+            break;
+        }
+      }
+      
       return null;
     }
 
