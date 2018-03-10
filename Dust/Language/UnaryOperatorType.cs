@@ -7,7 +7,8 @@ namespace Dust.Language
     PLUS_PLUS,
     MINUS_MINUS,
     TIMES_TIMES,
-    DIVIDE_DIVIDE
+    DIVIDE_DIVIDE,
+    BANG
   }
 
   public static class UnaryOperatorTypeHelper
@@ -24,6 +25,8 @@ namespace Dust.Language
           return UnaryOperatorType.TIMES_TIMES;
         case "//":
           return UnaryOperatorType.DIVIDE_DIVIDE;
+        case "!":
+          return UnaryOperatorType.BANG;
         default:
           throw new Exception($"Cannot find UnaryOperatorType for {@operator}");
       }
@@ -41,6 +44,8 @@ namespace Dust.Language
           return "**";
         case UnaryOperatorType.DIVIDE_DIVIDE:
           return "//";
+        case UnaryOperatorType.BANG:
+          return "!";
         default:
           throw new Exception($"Cannot find literal for {type} UnaryOperatorType");
       }

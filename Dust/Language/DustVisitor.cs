@@ -91,6 +91,11 @@ namespace Dust.Language
       return CreateUnaryExpression(context, context.expression(), "//");
     }
 
+    public override Node VisitBangUnaryExpression(DustParser.BangUnaryExpressionContext context)
+    {
+      return CreateUnaryExpression(context, context.expression(), "!");
+    }
+
     public override Node VisitEqualBinaryExpression(DustParser.EqualBinaryExpressionContext context)
     {
       return CreateBinaryExpression(context, context.expression(0), "==", context.expression(1));
@@ -243,6 +248,15 @@ namespace Dust.Language
           case UnaryOperatorType.MINUS_MINUS:
           case UnaryOperatorType.TIMES_TIMES:
           case UnaryOperatorType.DIVIDE_DIVIDE:
+            return new UnaryExpression(expression, operatorType);
+        }
+      }
+
+      if (expression.Type == DustType.Bool)
+      {
+        switch (operatorType)
+        {
+          case UnaryOperatorType.BANG:
             return new UnaryExpression(expression, operatorType);
         }
       }

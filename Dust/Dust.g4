@@ -48,7 +48,7 @@ expression
     | expression '>=' expression # BiggerEqualBinaryExpression
     | expression '<' expression # SmallerBinaryExpression
     | expression '<=' expression # SmallerEqualBinaryExpression
-    | '!' expression # BangUnaryExpression
+    | '!' (expression) # BangUnaryExpression
     | literal # LiteralExpression;
 
 declaration: 'let' 'const'?;

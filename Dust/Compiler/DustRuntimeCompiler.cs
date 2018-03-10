@@ -255,6 +255,18 @@ namespace Dust.Language.Compiler
         }
       }
 
+      if (DustType.GetDustType(value) == DustType.Bool)
+      {
+        switch (@operator)
+        {
+          case UnaryOperatorType.BANG:
+            if (DustType.GetDustType(value) == DustType.Bool)
+              return !(bool) value;
+
+            break;
+        }
+      }
+      
       return null;
     }
 
