@@ -1,0 +1,105 @@
+{
+  "fileTypes": [
+    "ds"
+  ],
+  "name": "Dust",
+  "patterns": [
+    {
+      "include": "#expression"
+    }
+  ],
+  "repository": {
+    "expression": {
+      "name": "meta.expression.sqf",
+      "patterns": [
+        {
+          "include": "#statement"
+        }
+      ]
+    },
+    "statement": {
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#literal"
+        },
+        {
+          "include": "#typeof"
+        },
+        {
+          "include": "#functionDeclaration"
+        },
+        {
+          "include": "#return"
+        }
+      ]
+    },
+    "comment": {
+      "name": "comment",
+      "patterns": [
+        { "include": "#commentBlock" },
+        { "include": "#commentLine" }
+      ]
+    },
+    "commentBlock": {
+      "begin": "#\\*",
+      "end": "\\*#",
+      "name": "comment.block"
+    },
+    "commentLine": {
+      "match": "#",
+      "name": "comment.line"
+    },
+    "literal": {
+      "name": "comment",
+      "patterns": [
+        { 
+          "include": "#literalConstants" 
+        },
+        { 
+          "include": "#literalString" 
+        },
+        { 
+          "include": "#literalNumeric" 
+        }
+      ]
+    },
+    "literal-constants": {
+        "match": "(\\s*)(false|true)\\b",
+        "name": "constant.language"
+    },
+    "literalString": {
+      "name": "string",
+      "begin": "\"",
+      "end": "\""
+    },
+    "literalNumeric": {
+      "name": "constant.numeric",
+      "match": "(\\+|-)?[0-9]+(.[0-9]+)?"
+    },
+    "typeof": {
+      "name": "constant.language",
+      "match": "(\\s*)typeof\\b"
+    },
+    "function-declaration": {
+      "begin": "(?<!\\.|\\$)\\b(?:(inline)\\s+)?(function\\b)\\s+(?:([A-Za-z$_][A-Za-z$_0-9]*)\\s*\\.\\s*)?([A-Za-z$_][A-Za-z$_0-9]*)\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.modifier.async.js"
+				},
+				"2": {
+					"name": "storage.type.function.js"
+				},
+				"3": {
+					"name": "meta.definition.function.js entity.name.function.js"
+				},
+				"4": {
+					"name": "meta.definition.function.js entity.name.function.js"
+				}
+			},
+			"end": "(?=$|^|;)|(?<=\\})"
+    },
+  }
+}
