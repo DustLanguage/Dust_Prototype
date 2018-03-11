@@ -62,7 +62,7 @@ StringLiteral=43
 '<='=19
 '!'=20
 'let'=21
-'const'=22
+'mut'=22
 'return'=23
 '{'=24
 '}'=25

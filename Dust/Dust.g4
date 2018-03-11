@@ -51,7 +51,7 @@ expression
     | '!' (expression) # BangUnaryExpression
     | literal # LiteralExpression;
 
-declaration: 'let' 'const'?;
+declaration: 'let' 'mut'?;
 
 returnStatement: 'return' expression eos;
 expressionStatement: expression eos;
@@ -81,7 +81,7 @@ functionParameterList: '(' (functionParameter (',' functionParameter)*)? ')';
 functionFragmentator: identifierName functionParameterList;
  
 functionParameter
-    : /*type*/'let' parameterName;
+    : /*type*/ 'mut'? parameterName;
     //| type parameterName '=' expression;
     
 parameterName: identifierName;

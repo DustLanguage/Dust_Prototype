@@ -65,8 +65,8 @@ public partial class DustParser : Parser {
 	private static readonly string[] _LiteralNames = {
 		null, "'('", "')'", "'typeof'", "'='", "'.'", "'+'", "'++'", "'-'", "'--'", 
 		"'*'", "'**'", "'/'", "'//'", "'=='", "'!='", "'>'", "'>='", "'<'", "'<='", 
-		"'!'", "'let'", "'const'", "'return'", "'{'", "'}'", "'public'", "'private'", 
-		"','", "'true'", "'false'", "'['", "']'", null, null, "';'"
+		"'!'", "'let'", "'mut'", "'return'", "'{'", "'}'", "'public'", "'private'", 
+		"','", "'true'", "'false'", "'['", "']'", null, null, "';'", null, null, 
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
@@ -150,7 +150,7 @@ public partial class DustParser : Parser {
 			State = 53;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << T__5) | (1L << T__7) | (1L << T__19) | (1L << T__20) | (1L << T__22) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << Identifier) | (1L << FloatLiteral) | (1L << IntLiteral) | (1L << StringLiteral))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << T__5) | (1L << T__7) | (1L << T__19) | (1L << T__20) | (1L << T__22) | (1L << T__25) | (1L << T__26) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << Identifier) | (1L << FloatLiteral) | (1L << IntLiteral) | (1L << StringLiteral))) != 0)) {
 				{
 				{
 				State = 48; statement();

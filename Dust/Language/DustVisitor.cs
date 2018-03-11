@@ -130,7 +130,7 @@ namespace Dust.Language
     {
       Expression initializer = null;
       string name = context.identifierName().GetText();
-      bool isAssignable = !context.declaration().GetText().Contains("const");
+      bool isMutable = context.declaration().GetText().Contains("mut");
 
       if (context.expression() != null)
       {
@@ -142,7 +142,7 @@ namespace Dust.Language
         throw new DustSyntaxErrorException($"Property '{name}' is already defined", context.identifierName().GetRange());
       }
 
-      return new PropertyDeclaration(initializer, new IdentifierExpression(name, isAssignable));
+      return new PropertyDeclaration(initializer, new IdentifierExpression(name, isMutable));
     }
 
     public override Node VisitIdentifierExpression(DustParser.IdentifierExpressionContext context)
@@ -168,7 +168,7 @@ namespace Dust.Language
     public override Node VisitGroupExpression(DustParser.GroupExpressionContext context)
     {
       Expression expression = (Expression) Visit(context.expression());
-      
+
       return new GroupExpression(expression);
     }
 
@@ -223,12 +223,12 @@ namespace Dust.Language
 
       if (!(left is IdentifierExpression))
       {
-        throw new DustSyntaxErrorException("Assignment target must be an assignable property.", context.GetRange());
+        throw new DustSyntaxErrorException("Assignment target must be a mutable property.", context.GetRange());
       }
 
-      if (!((IdentifierExpression) left).IsAssignable)
+      if (!((IdentifierExpression) left).IsMutable)
       {
-        throw new DustSyntaxErrorException($"'{((IdentifierExpression) left).Name}' is not assignable.", context.GetRange());
+        throw new DustSyntaxErrorException($"'{((IdentifierExpression) left).Name}' is not mutable.", context.GetRange());
       }
 
       return new AssignmentExpression(left, right);

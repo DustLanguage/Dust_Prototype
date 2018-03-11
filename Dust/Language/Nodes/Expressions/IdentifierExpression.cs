@@ -5,12 +5,12 @@ namespace Dust.Language.Nodes.Expressions
   public class IdentifierExpression : Expression, IEquatable<IdentifierExpression>
   {
     public string Name { get; }
-    public bool IsAssignable { get; }
+    public bool IsMutable { get; }
 
-    public IdentifierExpression(string name, bool isAssignable)
+    public IdentifierExpression(string name, bool isMutable)
     {
       Name = name;
-      IsAssignable = isAssignable;
+      IsMutable = isMutable;
       Value = null; //TODO ?? 
     }
 
@@ -30,7 +30,7 @@ namespace Dust.Language.Nodes.Expressions
     {
       unchecked
       {
-        return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ IsAssignable.GetHashCode();
+        return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ IsMutable.GetHashCode();
       }
     }
   }
