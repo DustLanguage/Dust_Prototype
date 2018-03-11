@@ -12,28 +12,17 @@
     "expression": {
       "name": "meta.expression.sqf",
       "patterns": [
-        {
-          "include": "#statement"
-        }
+        { "include": "#statement" }
       ]
     },
     "statement": {
       "patterns": [
-        {
-          "include": "#comment"
-        },
-        {
-          "include": "#literal"
-        },
-        {
-          "include": "#typeof"
-        },
-        {
-          "include": "#functionDeclaration"
-        },
-        {
-          "include": "#return"
-        }
+        { "include": "#comment" },
+        { "include": "#typeof" },
+        { "include": "#functionDeclaration" },
+        { "include": "#return" },
+        { "include": "#literal" },
+        { "include": "#variableDeclaration" }
       ]
     },
     "comment": {
@@ -66,7 +55,7 @@
         }
       ]
     },
-    "literal-constants": {
+    "literalConstants": {
         "match": "(\\s*)(false|true)\\b",
         "name": "constant.language"
     },
@@ -77,13 +66,31 @@
     },
     "literalNumeric": {
       "name": "constant.numeric",
-      "match": "(\\+|-)?[0-9]+(.[0-9]+)?"
+      "begin": "[0-9]+",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.operator.js"
+        }
+      },
+      "end": ""
+    },
+    "variableDeclaration": {
+      "begin": "(?<!\\.|\\$)\\b(let\\b|let\\s*mut\\b)\\s+(?:([A-Za-z$_][A-Za-z$_0-9]*)\\s*\\.\\s*)?([A-Za-z$_][A-Za-z$_0-9]*)\\s*\\=\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.function.js"
+        },
+        "3": {
+          "name": "entity.name.type"
+        }
+      },
+      "end": ""
     },
     "typeof": {
       "name": "constant.language",
       "match": "(\\s*)typeof\\b"
     },
-    "function-declaration": {
+    "functionDeclaration": {
       "begin": "(?<!\\.|\\$)\\b(?:(inline)\\s+)?(function\\b)\\s+(?:([A-Za-z$_][A-Za-z$_0-9]*)\\s*\\.\\s*)?([A-Za-z$_][A-Za-z$_0-9]*)\\s*",
 			"beginCaptures": {
 				"1": {
@@ -100,6 +107,7 @@
 				}
 			},
 			"end": "(?=$|^|;)|(?<=\\})"
-    },
-  }
+    }
+  },
+  "scopeName": "source.dust"
 }

@@ -30,7 +30,7 @@
 					".ds"
 				],
 				"configuration": "./dust.configuration.json"
-			}			
+			}
 		],
 		"grammars": [
 			{
