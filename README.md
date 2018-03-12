@@ -33,10 +33,10 @@ let mut mutable = 3 + 2 + 1 + 0 // Mutable property with initializer
 ```
 Functions:
 ```c
-let fn aFunction(mut mutableParam, unmutableParam) { // A function with a mutable and unmutable parameter. Returns their sum
+let fn aFunction(mut mutableParam, immutableParam) { // A function with a mutable and immutable parameter. Returns their sum
   mutableParam = 12 // Mutate the mutable parameter
     
-  let result = mutableParam + unmutableParam // Add them and store the sum into 'result' property
+  let result = mutableParam + immutableParam // Add them and store the sum into 'result' property
     
   return result // Return the result (sum)
 }
