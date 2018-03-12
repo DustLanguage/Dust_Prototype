@@ -139,7 +139,7 @@ namespace Dust.Language
 
       if (visitorContext.ContainsPropety(name))
       {
-        throw new DustSyntaxErrorException($"Property '{name}' is already defined", context.identifierName().GetRange());
+        throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.identifierName().GetRange());
       }
 
       return new PropertyDeclaration(initializer, new IdentifierExpression(name, isMutable));
@@ -152,7 +152,7 @@ namespace Dust.Language
 
       if (property == null)
       {
-        throw new DustSyntaxErrorException($"Property '{name}' is not defined", context.GetRange());
+        throw new DustSyntaxErrorException($"Identifier '{name}' is not defined", context.GetRange());
       }
 
       return property;
