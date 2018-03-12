@@ -4,11 +4,15 @@ Dust is an open source programming language written in C# with .NET Core.
 
 ## Introduction
 
-Dust is a simple and easy-to-understand programming language inspired by many other programming languages such as C#, Go, Rust, Swift, Elixir, F#, Dart and so on, but with a twist.
+Dust is a simple and easy-to-understand programming language inspired by 
+many other programming languages such as C#, Go, Rust, Swift, Elixir, F#, Dart and so on, but with a twist.
 Type system is also in the works.
 
+If you want to take a more in-depth look into the development process, check out our [Trello board](https://trello.com/b/viwlhPnj).
+
 Contributions are more than welcome even if you don't have any experience
-in programming language design, we're all here to learn. To learn more, see [Contributing](#contributing).
+in programming language design, we're all here to learn. To learn more, 
+see [Contributing](#contributing).
 
 If you have any more questions regarding contributing, syntax or anything
 else, please ask away in our [Gitter room](https://gitter.im/DustLanguage).
@@ -18,8 +22,8 @@ else, please ask away in our [Gitter room](https://gitter.im/DustLanguage).
 Planned syntax for a console hello world:
 ```c
 let fn main() {
- println("Hello World") // Print text and add a new line.
- Println("from Dust!")
+  println("Hello World") // Print text and add a new line.
+  println("from Dust!")
 }
 ```
 Properties (variables):
@@ -29,17 +33,21 @@ let mut mutable = 3 + 2 + 1 + 0 // Mutable property with initializer
 ```
 Functions:
 ```c
-let fn function(mut mutableParam, immutableParam) {// A function with a mutable and immutable parameter. Returns their sum
- mutableParam = 12 // Mutate the mutable parameter
-     let result = mutableParam + immutableParam // Add them and store the sum into 'result' property
-     return result // Return the result (sum)
+let fn aFunction(mut mutableParam, unmutableParam) { // A function with a mutable and unmutable parameter. Returns their sum
+  mutableParam = 12 // Mutate the mutable parameter
+    
+  let result = mutableParam + unmutableParam // Add them and store the sum into 'result' property
+    
+  return result // Return the result (sum)
 }
 ```
 
 More examples will be added soon but for now you can take a look at [this](
-https://pastebin.com/hhiV7wc7) obsolete syntax mock just to get an overview of other planned features and concepts (not the syntax). 
+https://pastebin.com/hhiV7wc7) obsolete syntax mock just to get an overview 
+of other planned features and concepts (not the syntax). 
 
-If you have any suggestions please open an issue or send a message in our [Gitter room](https://gitter.im/DustLanguage).
+If you have any suggestions please open an issue or send a message in our 
+[Gitter room](https://gitter.im/DustLanguage).
 
 ## Contributing
 
