@@ -145,6 +145,88 @@ namespace Dust.Language
       return new PropertyDeclaration(initializer, new IdentifierExpression(name, isMutable));
     }
 
+    public override Node VisitFunctionParameter(DustParser.FunctionParameterContext context)
+    {
+      string name = context.parameterName().GetText();
+      bool isMutable = context.GetText().Contains("mut");
+
+      return new FunctionParameter(new IdentifierExpression(name, isMutable), null);
+    }
+
+    public override Node VisitFunctionDeclaration(DustParser.FunctionDeclarationContext context)
+    {
+      string name = context.functionDeclarationBase().functionName().identifierName().GetText();
+
+      FunctionModifier[] modifiers = context.functionDeclarationBase().functionModifier().Select(modifierContext => FunctionModifier.Parse(modifierContext.GetText())).ToArray();
+      FunctionParameter[] parameters = context.functionParameterList()?.functionParameter().Select(Visit).Cast<FunctionParameter>().ToArray();
+
+      if (visitorContext.ContainsPropety(name))
+      {
+        throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.functionDeclarationBase().functionName().GetRange());
+      }
+
+      for (int i = 0; i < parameters?.Length; i++)
+      {
+        if (visitorContext.ContainsPropety(parameters[i].Identifier.Name))
+        {
+          // Needs testing
+          throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.functionParameterList().functionParameter(i).GetRange());
+        }
+      }
+
+      DustVisitor child = CreateChild(parameters ?? new FunctionParameter[0]);
+      List<Statement> statements = new List<Statement>();
+
+      DustType returnType = null;
+
+      if (context.statementBlock() != null)
+      {
+        foreach (DustParser.StatementContext statementContext in context.statementBlock().statement())
+        {
+          Statement statement = (Statement) child.Visit(statementContext);
+
+          if (statement is ReturnStatement returnStatement)
+          {
+            returnType = returnStatement.Expression.Type;
+          }
+
+          statements.Add(statement);
+        }
+      }
+
+// let fn a {return 1}
+
+      return new FunctionDeclaration(name, modifiers, parameters ?? new FunctionParameter[0], statements.ToArray(), returnType);
+    }
+
+    public override Node VisitReturnStatement(DustParser.ReturnStatementContext context)
+    {
+      Expression expression = (Expression) Visit(context.expression());
+
+      return new ReturnStatement(expression);
+    }
+
+    public override Node VisitCallParameter(DustParser.CallParameterContext context)
+    {
+      string name = context.GetText();
+
+      return new CallParameter(name);
+    }
+
+    public override Node VisitCallExpression(DustParser.CallExpressionContext context)
+    {
+      string name = context.functionName().GetText();
+      CallParameter[] parameters = context.callParameterList().callParameter().Select(Visit).Cast<CallParameter>().ToArray();
+      Function function = visitorContext.GetFunction(name);
+
+      if (function.Parameters.Length != parameters.Length)
+      {
+        throw new DustSyntaxErrorException($"Function '{function.Name}' has {function.Parameters.Length} parameters but is called with {parameters.Length}", context.callParameterList().GetRange());
+      }
+
+      return new CallExpression(function, parameters);
+    }
+
     public override Node VisitIdentifierExpression(DustParser.IdentifierExpressionContext context)
     {
       string name = context.GetText();
@@ -170,6 +252,18 @@ namespace Dust.Language
       Expression expression = (Expression) Visit(context.expression());
 
       return new GroupExpression(expression);
+    }
+
+    private DustVisitor CreateChild(FunctionParameter[] predefindProperties)
+    {
+      DustVisitor visitor = new DustVisitor(new DustContext(visitorContext));
+
+      foreach (FunctionParameter property in predefindProperties)
+      {
+        visitor.visitorContext.AddProperty(property.Identifier, null);
+      }
+
+      return visitor;
     }
 
     private BinaryExpression CreateBinaryExpression(DustParser.ExpressionContext context, DustParser.ExpressionContext leftContext, string @operator, DustParser.ExpressionContext rightContext)

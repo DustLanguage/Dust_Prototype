@@ -7,7 +7,7 @@ SemiColon: ';';
 MultiLineComment: '#*' .*? '*#' -> channel(HIDDEN);
 SingleLineComment: '#' .*? -> channel(HIDDEN);
 
-Function: 'fn' 'const'?;
+Function: 'fn';
 
 Identifier: IdentifierStart IdentifierPart*;
 
@@ -28,7 +28,7 @@ statement
 
 expression
     : '(' expression ')' # GroupExpression
-    | expression '(' parameters ')' # CallExpression
+    | functionName callParameterList # CallExpression
     | 'typeof' (expression) # TypeOfExpression
     | expression ('=' expression) # AssignmentExpression
     | arrayLiteral # ArrayLiteralExpression
@@ -57,23 +57,19 @@ returnStatement: 'return' expression eos;
 expressionStatement: expression eos;
 propertyDeclaration: declaration identifierName ('=' expression)?;
 
-functionDeclarationBase: declaration functionModifier* Function ((functionFragmentator? functionParameterList)?|functionName);
-functionBodyBase: '{' functionBody '}';
-functionBody: (statement eos)*;
+functionDeclarationBase: functionModifier* declaration Function functionName; //((functionFragmentator? functionParameterList)?|functionName);
 //functionReturn: '->' type;
 
 functionDeclaration
-    : functionDeclarationBase functionParameterList functionBodyBase
+    : functionDeclarationBase functionParameterList? statementBlock?;
     //| functionDeclarationBase functionParameterList /*functionReturn*/ functionBodyBase
-    | functionDeclarationBase functionBodyBase;
     //| functionDeclarationBase /*functionReturn*/ functionBodyBase;
-
-memberName: identifierName;
 
 functionName: identifierName;
 
 functionModifier
     : 'public'
+    | 'internal'
     | 'private';
  
 functionParameterList: '(' (functionParameter (',' functionParameter)*)? ')';
@@ -86,7 +82,11 @@ functionParameter
     
 parameterName: identifierName;
 
+memberName: identifierName;
+
 identifierName: Identifier;
+
+statementBlock: '{' statement? (eos statement)* '}';  
 
 /*type
     : 'string'
@@ -104,9 +104,9 @@ literal
   
 arrayLiteral: '[' (expression (',' expression)*)? ']';
   
-parameters: '(' (parameter (',' parameter)*)? ')';
+callParameterList: '(' (callParameter (',' callParameter)*)? ')';
 
-parameter: expression;
+callParameter: expression;
   
 eos
     : EOF

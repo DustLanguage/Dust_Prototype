@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from F:/PROJECTS/Active/Dust/Dust\Dust.g4 by ANTLR 4.7
+// Generated from E:/PROJECTS/Active/Dust/Dust\Dust.g4 by ANTLR 4.7
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -73,6 +73,20 @@ public partial class DustBaseListener : IDustListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitBangUnaryExpression([NotNull] DustParser.BangUnaryExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>DeleteUnaryExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDeleteUnaryExpression([NotNull] DustParser.DeleteUnaryExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>DeleteUnaryExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDeleteUnaryExpression([NotNull] DustParser.DeleteUnaryExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by the <c>TypeOfExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
@@ -442,30 +456,6 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitFunctionDeclarationBase([NotNull] DustParser.FunctionDeclarationBaseContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.functionBodyBase"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFunctionBodyBase([NotNull] DustParser.FunctionBodyBaseContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.functionBodyBase"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFunctionBodyBase([NotNull] DustParser.FunctionBodyBaseContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.functionBody"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFunctionBody([NotNull] DustParser.FunctionBodyContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.functionBody"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFunctionBody([NotNull] DustParser.FunctionBodyContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.functionDeclaration"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -477,18 +467,6 @@ public partial class DustBaseListener : IDustListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitFunctionDeclaration([NotNull] DustParser.FunctionDeclarationContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.memberName"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterMemberName([NotNull] DustParser.MemberNameContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.memberName"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitMemberName([NotNull] DustParser.MemberNameContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.functionName"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -562,6 +540,18 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitParameterName([NotNull] DustParser.ParameterNameContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="DustParser.memberName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMemberName([NotNull] DustParser.MemberNameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="DustParser.memberName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMemberName([NotNull] DustParser.MemberNameContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.identifierName"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -573,6 +563,18 @@ public partial class DustBaseListener : IDustListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitIdentifierName([NotNull] DustParser.IdentifierNameContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="DustParser.statementBlock"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStatementBlock([NotNull] DustParser.StatementBlockContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="DustParser.statementBlock"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStatementBlock([NotNull] DustParser.StatementBlockContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by the <c>Bool</c>
 	/// labeled alternative in <see cref="DustParser.literal"/>.
@@ -642,29 +644,29 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitArrayLiteral([NotNull] DustParser.ArrayLiteralContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.parameters"/>.
+	/// Enter a parse tree produced by <see cref="DustParser.callParameterList"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterParameters([NotNull] DustParser.ParametersContext context) { }
+	public virtual void EnterCallParameterList([NotNull] DustParser.CallParameterListContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.parameters"/>.
+	/// Exit a parse tree produced by <see cref="DustParser.callParameterList"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitParameters([NotNull] DustParser.ParametersContext context) { }
+	public virtual void ExitCallParameterList([NotNull] DustParser.CallParameterListContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.parameter"/>.
+	/// Enter a parse tree produced by <see cref="DustParser.callParameter"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterParameter([NotNull] DustParser.ParameterContext context) { }
+	public virtual void EnterCallParameter([NotNull] DustParser.CallParameterContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.parameter"/>.
+	/// Exit a parse tree produced by <see cref="DustParser.callParameter"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitParameter([NotNull] DustParser.ParameterContext context) { }
+	public virtual void ExitCallParameter([NotNull] DustParser.CallParameterContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.eos"/>.
 	/// <para>The default implementation does nothing.</para>

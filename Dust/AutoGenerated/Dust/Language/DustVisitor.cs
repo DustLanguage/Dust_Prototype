@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from F:/PROJECTS/Active/Dust/Dust\Dust.g4 by ANTLR 4.7
+// Generated from E:/PROJECTS/Active/Dust/Dust\Dust.g4 by ANTLR 4.7
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -51,6 +51,13 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitBangUnaryExpression([NotNull] DustParser.BangUnaryExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>DeleteUnaryExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDeleteUnaryExpression([NotNull] DustParser.DeleteUnaryExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>TypeOfExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
@@ -236,29 +243,11 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitFunctionDeclarationBase([NotNull] DustParser.FunctionDeclarationBaseContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="DustParser.functionBodyBase"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitFunctionBodyBase([NotNull] DustParser.FunctionBodyBaseContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="DustParser.functionBody"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitFunctionBody([NotNull] DustParser.FunctionBodyContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="DustParser.functionDeclaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitFunctionDeclaration([NotNull] DustParser.FunctionDeclarationContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="DustParser.memberName"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitMemberName([NotNull] DustParser.MemberNameContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="DustParser.functionName"/>.
 	/// </summary>
@@ -296,11 +285,23 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitParameterName([NotNull] DustParser.ParameterNameContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="DustParser.memberName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMemberName([NotNull] DustParser.MemberNameContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="DustParser.identifierName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitIdentifierName([NotNull] DustParser.IdentifierNameContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="DustParser.statementBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatementBlock([NotNull] DustParser.StatementBlockContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>Bool</c>
 	/// labeled alternative in <see cref="DustParser.literal"/>.
@@ -336,17 +337,17 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitArrayLiteral([NotNull] DustParser.ArrayLiteralContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="DustParser.parameters"/>.
+	/// Visit a parse tree produced by <see cref="DustParser.callParameterList"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitParameters([NotNull] DustParser.ParametersContext context);
+	Result VisitCallParameterList([NotNull] DustParser.CallParameterListContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="DustParser.parameter"/>.
+	/// Visit a parse tree produced by <see cref="DustParser.callParameter"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitParameter([NotNull] DustParser.ParameterContext context);
+	Result VisitCallParameter([NotNull] DustParser.CallParameterContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="DustParser.eos"/>.
 	/// </summary>

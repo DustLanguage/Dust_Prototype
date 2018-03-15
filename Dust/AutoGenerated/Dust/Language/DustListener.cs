@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from F:/PROJECTS/Active/Dust/Dust\Dust.g4 by ANTLR 4.7
+// Generated from E:/PROJECTS/Active/Dust/Dust\Dust.g4 by ANTLR 4.7
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -63,6 +63,18 @@ public interface IDustListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitBangUnaryExpression([NotNull] DustParser.BangUnaryExpressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>DeleteUnaryExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDeleteUnaryExpression([NotNull] DustParser.DeleteUnaryExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>DeleteUnaryExpression</c>
+	/// labeled alternative in <see cref="DustParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDeleteUnaryExpression([NotNull] DustParser.DeleteUnaryExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>TypeOfExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
@@ -378,26 +390,6 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitFunctionDeclarationBase([NotNull] DustParser.FunctionDeclarationBaseContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.functionBodyBase"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterFunctionBodyBase([NotNull] DustParser.FunctionBodyBaseContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.functionBodyBase"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitFunctionBodyBase([NotNull] DustParser.FunctionBodyBaseContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.functionBody"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterFunctionBody([NotNull] DustParser.FunctionBodyContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.functionBody"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitFunctionBody([NotNull] DustParser.FunctionBodyContext context);
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.functionDeclaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -407,16 +399,6 @@ public interface IDustListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitFunctionDeclaration([NotNull] DustParser.FunctionDeclarationContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.memberName"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterMemberName([NotNull] DustParser.MemberNameContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.memberName"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitMemberName([NotNull] DustParser.MemberNameContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.functionName"/>.
 	/// </summary>
@@ -478,6 +460,16 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitParameterName([NotNull] DustParser.ParameterNameContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="DustParser.memberName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMemberName([NotNull] DustParser.MemberNameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="DustParser.memberName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMemberName([NotNull] DustParser.MemberNameContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.identifierName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -487,6 +479,16 @@ public interface IDustListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitIdentifierName([NotNull] DustParser.IdentifierNameContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="DustParser.statementBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatementBlock([NotNull] DustParser.StatementBlockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="DustParser.statementBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatementBlock([NotNull] DustParser.StatementBlockContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>Bool</c>
 	/// labeled alternative in <see cref="DustParser.literal"/>.
@@ -546,25 +548,25 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitArrayLiteral([NotNull] DustParser.ArrayLiteralContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.parameters"/>.
+	/// Enter a parse tree produced by <see cref="DustParser.callParameterList"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterParameters([NotNull] DustParser.ParametersContext context);
+	void EnterCallParameterList([NotNull] DustParser.CallParameterListContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.parameters"/>.
+	/// Exit a parse tree produced by <see cref="DustParser.callParameterList"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitParameters([NotNull] DustParser.ParametersContext context);
+	void ExitCallParameterList([NotNull] DustParser.CallParameterListContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.parameter"/>.
+	/// Enter a parse tree produced by <see cref="DustParser.callParameter"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterParameter([NotNull] DustParser.ParameterContext context);
+	void EnterCallParameter([NotNull] DustParser.CallParameterContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.parameter"/>.
+	/// Exit a parse tree produced by <see cref="DustParser.callParameter"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitParameter([NotNull] DustParser.ParameterContext context);
+	void ExitCallParameter([NotNull] DustParser.CallParameterContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.eos"/>.
 	/// </summary>

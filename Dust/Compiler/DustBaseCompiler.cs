@@ -32,13 +32,14 @@ namespace Dust.Language.Compiler
       {
         case ExpressionStatement statement:
           return CompileExpressionStatement(statement);
-        case FunctionDeclaration statement:
-          return CompileFunctionDeclaration(statement);
         case ReturnStatement statement:
           return CompileReturnStatement(statement);
         case PropertyDeclaration statement:
           return CompilePropertyDeclaration(statement);
+        case FunctionDeclaration statement:
+          return CompileFunctionDeclaration(statement);
       }
+
       return default(T);
     }
 
@@ -76,9 +77,9 @@ namespace Dust.Language.Compiler
       return CompileExpression(statement.Expression);
     }
 
-    protected abstract T CompileFunctionDeclaration(FunctionDeclaration statement);
     protected abstract T CompileReturnStatement(ReturnStatement statement);
     protected abstract T CompilePropertyDeclaration(PropertyDeclaration statement);
+    protected abstract T CompileFunctionDeclaration(FunctionDeclaration statement);
 
     #endregion
 

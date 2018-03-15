@@ -22,23 +22,25 @@ namespace Dust.Language.Compiler
       return CompileStatements(module.Statements);
     }
 
-    protected override object CompileFunctionDeclaration(FunctionDeclaration statement)
-    {
-      throw new NotImplementedException();
-    }
-
-    protected override object CompileReturnStatement(ReturnStatement statement)
-    {
-      throw new NotImplementedException();
-    }
-
     protected override object CompilePropertyDeclaration(PropertyDeclaration statement)
     {
       object value = CompileExpression(statement.Initializer);
 
-      visitorContext.AddProperty(statement.Identifier, value);
+      compilerContext.AddProperty(statement.Identifier, value);
 
       return value;
+    }
+
+    protected override object CompileFunctionDeclaration(FunctionDeclaration statement)
+    {
+      compilerContext.AddFunction(statement.Function);
+
+      return null;
+    }
+
+    protected override object CompileCallExpression(CallExpression expression)
+    { 
+      return CompileStatements(expression.Function.Statements);
     }
 
     protected override object CompileTypeOfExpression(TypeOfExpression expression)
@@ -60,6 +62,13 @@ namespace Dust.Language.Compiler
       return value;
     }
 
+    protected override object CompileReturnStatement(ReturnStatement statement)
+    {
+      object value = CompileExpression(statement.Expression);
+
+      return value;
+    }
+    
     protected override object CompileBinaryExpression(BinaryExpression expression)
     {
       object left = CompileExpression(expression.Left);
@@ -277,11 +286,6 @@ namespace Dust.Language.Compiler
       expression.Left.Value = value;
 
       return value;
-    }
-
-    protected override object CompileCallExpression(CallExpression expression)
-    {
-      throw new NotImplementedException();
     }
 
     protected override object CompileIdentifierExpression(IdentifierExpression expression)
