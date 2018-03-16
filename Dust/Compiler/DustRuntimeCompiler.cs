@@ -239,6 +239,20 @@ namespace Dust.Compiler
       object value = CompileExpression(expression.Expression);
       UnaryOperatorType @operator = expression.Operator;
 
+      if (expression.Expression is IdentifierExpression identifierExpression)
+      {
+        compilerContext.DeleteProperty(identifierExpression);
+
+        return null;
+      }
+
+      if (expression.Expression is Function function)
+      {
+        compilerContext.DeleteFunction(function);
+
+        return null;
+      }
+
       if (DustType.GetDustType(value) == DustType.Number)
       {
         switch (@operator)

@@ -16,6 +16,5 @@ namespace Dust.Language.Nodes.Expressions
       Operator = @operator;
       Right = right;
     }
-
   }
 }

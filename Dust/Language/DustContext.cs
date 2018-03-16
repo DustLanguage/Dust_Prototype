@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Dust.Extensions;
 using Dust.Language.Nodes.Expressions;
 
@@ -6,9 +7,12 @@ namespace Dust.Language
 {
   public class DustContext
   {
-    private readonly List<IdentifierExpression> _properties = new List<IdentifierExpression>();
-    private readonly List<Function> _functions = new List<Function>();
-    private readonly DustContext _parent;
+    private readonly List<IdentifierExpression> properties = new List<IdentifierExpression>();
+    private readonly List<Function> functions = new List<Function>();
+    private readonly DustContext parent;
+
+
+    private List<DustContext> children = new List<DustContext>();
 
     public DustContext()
     {
@@ -16,7 +20,9 @@ namespace Dust.Language
 
     public DustContext(DustContext parent)
     {
-      _parent = parent;
+      this.parent = parent;
+
+      children.Add(this);
     }
 
     public IdentifierExpression GetProperty(string name)
@@ -43,7 +49,8 @@ namespace Dust.Language
 
     public void DeleteProperty(IdentifierExpression property)
     {
-      _properties.Remove(property);
+      properties.Remove(property);
+      parent?.properties.Remove(property);
     }
 
     public void AddFunction(Function function)
@@ -53,7 +60,7 @@ namespace Dust.Language
 
     public Function GetFunction(string name)
     {
-      return _functions.Get(element => element.Name == name) ?? _parent._functions.Get(element => element.Name == name);
+      return functions.Get(element => element.Name == name) ?? parent?.functions.Get(element => element.Name == name);
     }
 
     public bool ContainsFunction(string name)
@@ -61,9 +68,20 @@ namespace Dust.Language
       return GetFunction(name) != null;
     }
 
+
     public void DeleteFunction(Function function)
     {
-      _functions.Remove(function);
+      DoActionInChildren(context => context.DeleteFunction(function));
+      functions.Remove(function);
+    }
+
+    private void DoActionInChildren(Action<DustContext> action)
+    {
+      foreach (DustContext context in children)
+        action(context);
+
+      foreach (DustContext context in parent?.children)
+        action(context);
     }
   }
 }

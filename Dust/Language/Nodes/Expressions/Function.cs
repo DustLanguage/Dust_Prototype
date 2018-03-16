@@ -11,7 +11,7 @@ namespace Dust.Language.Nodes.Expressions
     public Statement[] Statements { get; }
     public DustType ReturnType { get; }
 
-    public override DustType Type { get; }
+    public override DustType Type => DustType.Function;
 
     public Function(string name, FunctionModifier[] modifiers, FunctionParameter[] parameters, Statement[] statements, DustType returnType)
     {
@@ -20,7 +20,6 @@ namespace Dust.Language.Nodes.Expressions
       Modifiers = modifiers;
       Statements = statements;
       ReturnType = returnType;
-      Type = returnType;
     }
   }
 }

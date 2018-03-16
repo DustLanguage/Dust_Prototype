@@ -48,6 +48,7 @@ expression
     | expression '>=' expression # BiggerEqualBinaryExpression
     | expression '<' expression # SmallerBinaryExpression
     | expression '<=' expression # SmallerEqualBinaryExpression
+    | 'delete' expression # DeleteUnaryExpression
     | '!' (expression) # BangUnaryExpression
     | literal # LiteralExpression;
 

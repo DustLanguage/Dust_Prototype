@@ -13,6 +13,7 @@ namespace Dust.Language.Types
     public static DustType Int => new DustType("int", Number);
     public static DustType Float => new DustType("float", Number);
     public static DustType Array => new DustType("array", Object);
+    public static DustType Function => new DustType("function", Object);
 
     public string Name { get; }
     public DustType Parent { get; }

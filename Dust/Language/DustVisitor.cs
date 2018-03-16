@@ -127,6 +127,11 @@ namespace Dust.Language
       return CreateBinaryExpression(context, context.expression(0), "<=", context.expression(1));
     }
 
+    public override Node VisitDeleteUnaryExpression(DustParser.DeleteUnaryExpressionContext context)
+    {
+      return CreateUnaryExpression(context, context.expression(), "delete");
+    }
+
     public override Node VisitPropertyDeclaration(DustParser.PropertyDeclarationContext context)
     {
       Expression initializer = null;
@@ -195,8 +200,6 @@ namespace Dust.Language
         }
       }
 
-// let fn a {return 1}
-
       return new FunctionDeclaration(name, modifiers, parameters ?? new FunctionParameter[0], statements.ToArray(), returnType);
     }
 
@@ -220,6 +223,11 @@ namespace Dust.Language
       CallParameter[] parameters = context.callParameterList().callParameter().Select(Visit).Cast<CallParameter>().ToArray();
       Function function = _visitorContext.GetFunction(name);
 
+      if (function == null)
+      {
+        throw new DustSyntaxErrorException($"Function '{name}' is not defined", context.functionName().GetRange());
+      }
+
       if (function.Parameters.Length != parameters.Length)
       {
         throw new DustSyntaxErrorException($"Function '{function.Name}' has {function.Parameters.Length} parameters but is called with {parameters.Length}", context.callParameterList().GetRange());
@@ -231,11 +239,17 @@ namespace Dust.Language
     public override Node VisitIdentifierExpression(DustParser.IdentifierExpressionContext context)
     {
       string name = context.GetText();
-      IdentifierExpression property = _visitorContext.GetProperty(name);
+      IdentifierExpression property = visitorContext.GetProperty(name);
+      Function function = visitorContext.GetFunction(name);
+
+      if (property == null && function == null)
+      {
+        throw new DustSyntaxErrorException($"Identifier '{name}' is not defined", context.GetRange());
+      }
 
       if (property == null)
       {
-        throw new DustSyntaxErrorException($"Identifier '{name}' is not defined", context.GetRange());
+        return function;
       }
 
       return property;
@@ -352,6 +366,15 @@ namespace Dust.Language
         switch (operatorType)
         {
           case UnaryOperatorType.BANG:
+            return new UnaryExpression(expression, operatorType);
+        }
+      }
+
+      if (expression is IdentifierExpression || expression is Function)
+      {
+        switch (operatorType)
+        {
+          case UnaryOperatorType.DELETE:
             return new UnaryExpression(expression, operatorType);
         }
       }
