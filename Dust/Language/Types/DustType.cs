@@ -2,7 +2,7 @@
 using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
 
-namespace Dust.Language
+namespace Dust.Language.Types
 {
   public class DustType : IEquatable<DustType>
   {
@@ -23,12 +23,13 @@ namespace Dust.Language
     {
       Name = name;
       Parent = parent;
-      Root = isRoot ? this : parent.Root;
+      Root = isRoot ? this : parent?.Root;
       IsRoot = isRoot;
     }
 
     public static bool operator ==(DustType left, DustType right)
     {
+      if ((object)left == null || (object)right == null) return false;
       if (right.IsRoot)
       {
         return left.Name == right.Name || left.Root.Name == right.Name || left.Root.Name == right.Root.Name || left.Name == right.Root.Name;
@@ -39,6 +40,7 @@ namespace Dust.Language
 
     public static bool operator !=(DustType left, DustType right)
     {
+      if ((object)left == null || (object)right == null) return false;
       if (right.IsRoot)
       {
         return left.Name != right.Name || left.Root.Name != right.Name || left.Root.Name != right.Root.Name || left.Name != right.Root.Name;
@@ -60,7 +62,10 @@ namespace Dust.Language
         case bool _:
           return Bool;
         default:
-          throw new Exception($"Could not find type for {@object.GetType()}");
+          if (@object == null)
+          {
+            throw new Exception($"Object is null.");
+          } else throw new Exception($"Could not find type for {@object.GetType()}");
       }
     }
 

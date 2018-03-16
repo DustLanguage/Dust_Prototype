@@ -1,4 +1,4 @@
-﻿namespace Dust.Language.Nodes.Expressions
+﻿namespace Dust.Language.Nodes
 {
   public class CallParameter : Node
   {

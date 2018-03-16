@@ -1,4 +1,6 @@
-﻿namespace Dust.Language.Nodes.Expressions
+﻿using Dust.Language.Nodes.Expressions;
+
+namespace Dust.Language.Nodes
 {
   public class FunctionParameter : Node
   {

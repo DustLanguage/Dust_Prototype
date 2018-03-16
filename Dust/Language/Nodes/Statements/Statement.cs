@@ -1,4 +1,4 @@
-﻿namespace Dust.Language.Nodes
+﻿namespace Dust.Language.Nodes.Statements
 {
   public class Statement : Node
   {

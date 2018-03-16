@@ -1,6 +1,7 @@
-﻿using Dust.Language.Nodes.Expressions;
+﻿using Dust.Language.Nodes.Statements;
+using Dust.Language.Types;
 
-namespace Dust.Language.Nodes
+namespace Dust.Language.Nodes.Expressions
 {
   public class Function : Expression
   {

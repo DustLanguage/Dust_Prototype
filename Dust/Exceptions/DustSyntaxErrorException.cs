@@ -1,7 +1,7 @@
 ﻿using System;
 using LanguageServer.Parameters;
 
-namespace Dust.Language.Exceptions
+namespace Dust.Exceptions
 {
   public class DustSyntaxErrorException : Exception
   {

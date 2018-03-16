@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Dust.Exceptions;
 using Dust.Extensions;
-using Dust.Language.Exceptions;
 using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
 using Dust.Language.Nodes.Statements;
+using Dust.Language.Types;
 
 namespace Dust.Language
 {
   public class DustVisitor : DustBaseVisitor<Node>
   {
-    private readonly DustContext visitorContext;
+    private readonly DustContext _visitorContext;
 
     public DustVisitor(DustContext visitorContext)
     {
-      this.visitorContext = visitorContext;
+      _visitorContext = visitorContext;
     }
 
     public override Node VisitModule(DustParser.ModuleContext context)
@@ -137,7 +138,7 @@ namespace Dust.Language
         initializer = (Expression) Visit(context.expression());
       }
 
-      if (visitorContext.ContainsPropety(name))
+      if (_visitorContext.ContainsPropety(name))
       {
         throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.identifierName().GetRange());
       }
@@ -160,14 +161,14 @@ namespace Dust.Language
       FunctionModifier[] modifiers = context.functionDeclarationBase().functionModifier().Select(modifierContext => FunctionModifier.Parse(modifierContext.GetText())).ToArray();
       FunctionParameter[] parameters = context.functionParameterList()?.functionParameter().Select(Visit).Cast<FunctionParameter>().ToArray();
 
-      if (visitorContext.ContainsPropety(name))
+      if (_visitorContext.ContainsPropety(name))
       {
         throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.functionDeclarationBase().functionName().GetRange());
       }
 
       for (int i = 0; i < parameters?.Length; i++)
       {
-        if (visitorContext.ContainsPropety(parameters[i].Identifier.Name))
+        if (_visitorContext.ContainsPropety(parameters[i].Identifier.Name))
         {
           // Needs testing
           throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.functionParameterList().functionParameter(i).GetRange());
@@ -217,7 +218,7 @@ namespace Dust.Language
     {
       string name = context.functionName().GetText();
       CallParameter[] parameters = context.callParameterList().callParameter().Select(Visit).Cast<CallParameter>().ToArray();
-      Function function = visitorContext.GetFunction(name);
+      Function function = _visitorContext.GetFunction(name);
 
       if (function.Parameters.Length != parameters.Length)
       {
@@ -230,7 +231,7 @@ namespace Dust.Language
     public override Node VisitIdentifierExpression(DustParser.IdentifierExpressionContext context)
     {
       string name = context.GetText();
-      IdentifierExpression property = visitorContext.GetProperty(name);
+      IdentifierExpression property = _visitorContext.GetProperty(name);
 
       if (property == null)
       {
@@ -256,11 +257,11 @@ namespace Dust.Language
 
     private DustVisitor CreateChild(FunctionParameter[] predefindProperties)
     {
-      DustVisitor visitor = new DustVisitor(new DustContext(visitorContext));
+      DustVisitor visitor = new DustVisitor(new DustContext(_visitorContext));
 
       foreach (FunctionParameter property in predefindProperties)
       {
-        visitor.visitorContext.AddProperty(property.Identifier, null);
+        visitor._visitorContext.AddProperty(property.Identifier, null);
       }
 
       return visitor;
@@ -271,7 +272,7 @@ namespace Dust.Language
       Expression left = (Expression) Visit(leftContext);
       Expression right = (Expression) Visit(rightContext);
 
-      BinaryOperatorType operatorType = BinaryOperatorTypeHelper.FromString(@operator.ToString());
+      BinaryOperatorType operatorType = BinaryOperatorTypeHelper.FromString(@operator);
 
       switch (operatorType)
       {

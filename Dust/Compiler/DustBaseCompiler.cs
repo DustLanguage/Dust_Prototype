@@ -1,19 +1,20 @@
 ﻿using System.Linq;
+using Dust.Language;
 using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
 using Dust.Language.Nodes.Statements;
 
-namespace Dust.Language.Compiler
+namespace Dust.Compiler
 {
-  public abstract class BaseCompiler<T>
+  public abstract class DustBaseCompiler<T>
   {
-    public virtual string Name { get; }
+    public virtual string Name { get; } = "";
 
-    protected readonly DustContext compilerContext;
+    protected readonly DustContext CompilerContext;
 
-    public BaseCompiler(DustContext compilerContext)
+    public DustBaseCompiler(DustContext compilerContext)
     {
-      this.compilerContext = compilerContext;
+      CompilerContext = compilerContext;
     }
 
     public virtual T CompileModule(Module module)

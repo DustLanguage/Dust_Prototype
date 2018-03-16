@@ -1,4 +1,6 @@
-﻿namespace Dust.Language.Nodes.Expressions
+﻿using Dust.Language.Types;
+
+namespace Dust.Language.Nodes.Expressions
 {
   public class ArrayExpression : Expression
   {

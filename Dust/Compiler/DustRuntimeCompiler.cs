@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Linq;
+using Dust.Language;
 using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
 using Dust.Language.Nodes.Statements;
+using Dust.Language.Types;
 
 //222222+3445432+6546/566*4555
 
-namespace Dust.Language.Compiler
+namespace Dust.Compiler
 {
-  public class DustRuntimeCompiler : BaseCompiler<object>
+  public class DustRuntimeCompiler : DustBaseCompiler<object>
   {
     public override string Name => "runtime";
 
@@ -26,14 +28,14 @@ namespace Dust.Language.Compiler
     {
       object value = CompileExpression(statement.Initializer);
 
-      compilerContext.AddProperty(statement.Identifier, value);
+      CompilerContext.AddProperty(statement.Identifier, value);
 
       return value;
     }
 
     protected override object CompileFunctionDeclaration(FunctionDeclaration statement)
     {
-      compilerContext.AddFunction(statement.Function);
+      CompilerContext.AddFunction(statement.Function);
 
       return null;
     }

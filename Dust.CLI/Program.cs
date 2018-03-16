@@ -1,7 +1,7 @@
 ﻿using System;
 using Antlr4.Runtime;
+using Dust.Compiler;
 using Dust.Language;
-using Dust.Language.Compiler;
 using Dust.Language.Nodes;
 
 namespace Dust.CLI

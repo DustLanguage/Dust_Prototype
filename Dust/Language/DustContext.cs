@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using Dust.Extensions;
-using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
 
 namespace Dust.Language
 {
   public class DustContext
   {
-    private readonly List<IdentifierExpression> properties = new List<IdentifierExpression>();
-    private readonly List<Function> functions = new List<Function>();
-    private readonly DustContext parent;
+    private readonly List<IdentifierExpression> _properties = new List<IdentifierExpression>();
+    private readonly List<Function> _functions = new List<Function>();
+    private readonly DustContext _parent;
 
     public DustContext()
     {
@@ -17,24 +16,24 @@ namespace Dust.Language
 
     public DustContext(DustContext parent)
     {
-      this.parent = parent;
+      _parent = parent;
     }
 
     public IdentifierExpression GetProperty(string name)
     {
-      return properties.Get(element => element.Name == name);
+      return _properties.Get(element => element.Name == name);
     }
 
     public void AddProperty(IdentifierExpression property, object value)
     {
       property.Value = value;
 
-      properties.Add(property);
+      _properties.Add(property);
     }
 
     public void SetProperty(IdentifierExpression property, object value)
     {
-      properties.Get(property).Value = value;
+      _properties.Get(property).Value = value;
     }
 
     public bool ContainsPropety(string name)
@@ -44,17 +43,17 @@ namespace Dust.Language
 
     public void DeleteProperty(IdentifierExpression property)
     {
-      properties.Remove(property);
+      _properties.Remove(property);
     }
 
     public void AddFunction(Function function)
     {
-      functions.Add(function);
+      _functions.Add(function);
     }
 
     public Function GetFunction(string name)
     {
-      return functions.Get(element => element.Name == name) ?? parent.functions.Get(element => element.Name == name);
+      return _functions.Get(element => element.Name == name) ?? _parent._functions.Get(element => element.Name == name);
     }
 
     public bool ContainsFunction(string name)
@@ -64,7 +63,7 @@ namespace Dust.Language
 
     public void DeleteFunction(Function function)
     {
-      functions.Remove(function);
+      _functions.Remove(function);
     }
   }
 }
