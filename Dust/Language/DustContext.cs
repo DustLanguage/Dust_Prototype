@@ -9,8 +9,8 @@ namespace Dust.Language
   {
     private readonly List<IdentifierExpression> properties = new List<IdentifierExpression>();
     private readonly List<Function> functions = new List<Function>();
-    private readonly DustContext parent;
 
+    private readonly DustContext parent;
 
     private List<DustContext> children = new List<DustContext>();
 
@@ -27,19 +27,19 @@ namespace Dust.Language
 
     public IdentifierExpression GetProperty(string name)
     {
-      return _properties.Get(element => element.Name == name);
+      return properties.Get(element => element.Name == name);
     }
 
     public void AddProperty(IdentifierExpression property, object value)
     {
       property.Value = value;
 
-      _properties.Add(property);
+      properties.Add(property);
     }
 
     public void SetProperty(IdentifierExpression property, object value)
     {
-      _properties.Get(property).Value = value;
+      properties.Get(property).Value = value;
     }
 
     public bool ContainsPropety(string name)
@@ -55,7 +55,7 @@ namespace Dust.Language
 
     public void AddFunction(Function function)
     {
-      _functions.Add(function);
+      functions.Add(function);
     }
 
     public Function GetFunction(string name)
@@ -67,7 +67,6 @@ namespace Dust.Language
     {
       return GetFunction(name) != null;
     }
-
 
     public void DeleteFunction(Function function)
     {

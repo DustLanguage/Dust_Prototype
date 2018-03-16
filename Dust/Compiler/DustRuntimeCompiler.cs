@@ -28,14 +28,14 @@ namespace Dust.Compiler
     {
       object value = CompileExpression(statement.Initializer);
 
-      CompilerContext.AddProperty(statement.Identifier, value);
+      compilerContext.AddProperty(statement.Identifier, value);
 
       return value;
     }
 
     protected override object CompileFunctionDeclaration(FunctionDeclaration statement)
     {
-      CompilerContext.AddFunction(statement.Function);
+      compilerContext.AddFunction(statement.Function);
 
       return null;
     }

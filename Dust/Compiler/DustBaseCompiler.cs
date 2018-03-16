@@ -10,11 +10,11 @@ namespace Dust.Compiler
   {
     public virtual string Name { get; } = "";
 
-    protected readonly DustContext CompilerContext;
+    protected readonly DustContext compilerContext;
 
     public DustBaseCompiler(DustContext compilerContext)
     {
-      CompilerContext = compilerContext;
+      this.compilerContext = compilerContext;
     }
 
     public virtual T CompileModule(Module module)
