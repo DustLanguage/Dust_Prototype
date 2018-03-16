@@ -44,9 +44,9 @@ namespace Dust.Tests
         }
 
         [Theory]
-        [InlineData("Expression", "Expression")]
-        [InlineData("Sad Expression", "Sad Expression")]
-        [InlineData("Dust File Syntax", "Dust File Syntax")]
+        [InlineData("\"Expression\"", "Expression")]
+        [InlineData("\'Sad Expression\'", "Sad Expression")]
+        [InlineData("\"Dust File Syntax\"", "Dust File Syntax")]
         public static void Test_ParseString(string input, string expected)
         {
             Assert.Equal(ParseStatements(input), new ExpressionStatement(new LiteralExpression(expected)));
@@ -55,7 +55,6 @@ namespace Dust.Tests
         [Theory]
         [InlineData("true", true)]
         [InlineData("false", false)]
-        [InlineData("2+2=4", true)]
         public static void Test_ParseBoolean(string input, bool expected)
         {
             Assert.Equal(ParseStatements(input), new ExpressionStatement(new LiteralExpression(expected)));
@@ -63,12 +62,39 @@ namespace Dust.Tests
         
         
 
-        /*[Theory]
-        [InlineData("1+1", new ExpressionStatement(new BinaryExpression(new LiteralExpression(1), BinaryOperatorType.PLUS,
-            new LiteralExpression(1)))]
-        public static void Test_ParseArthimeticOperation(string input, ExpressionStatement expected)
+        [Theory]
+        [InlineData("1+1", 2f)]
+        [InlineData("1*1", 1f)]
+        [InlineData("2/1", 2f)]
+        [InlineData("1-1", 0f)]
+        public static void Test_ParseArthimeticOperation(string input, float expected)
         {
-            Assert.Equal(ParseStatements(input), expected);
-        }*/
+            string currentValue = "", firstSide = "", secondSide = "";
+            BinaryOperatorType operatorType;
+            foreach (char c in input)
+            {
+                if (c == '+' || c == '-' || c == '/' || c == '*')
+                {
+                    operatorType = BinaryOperatorTypeHelper.FromString(c.ToString());
+                    if (firstSide != "")
+                    {
+                        secondSide = currentValue;
+                        float firstSideFloat = float.Parse(firstSide);
+                        float secondSideFloat = float.Parse(secondSide);
+                        // firstSideFloat, operatorType, secondSideFloat
+                        Assert.Equal(ParseStatements(input), new ExpressionStatement(new BinaryExpression(new LiteralExpression(firstSideFloat),
+                            operatorType, new LiteralExpression(secondSideFloat))));
+                    }
+                    else
+                    {
+                        firstSide = currentValue;
+                    }
+
+                    currentValue = "";
+                }
+                currentValue += c;
+            } 
+  //         
+        }
     }
 }
