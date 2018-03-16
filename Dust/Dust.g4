@@ -15,7 +15,7 @@ PreProcessorDirective: '##' .*?;
 
 FloatLiteral: [0-9]+'.'[0-9]+;
 IntLiteral: [0-9]+;
-StringLiteral: ('"'|'\'')UnicodeSymbol*('"'|'\'');
+StringLiteral: ('"'|'\'').*?('"'|'\'');
 //CharLiteral: ('"'|'\'')UnicodeCharacter('"'|'\'');
 
 module: (statement eos)*;
