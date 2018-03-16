@@ -12,8 +12,8 @@ namespace Dust.Language.Compiler
   {
     public override string Name => "runtime";
 
-    public DustRuntimeCompiler(DustContext visitorContext)
-      : base(visitorContext)
+    public DustRuntimeCompiler(DustContext compilerContext)
+      : base(compilerContext)
     {
     }
 
@@ -39,7 +39,7 @@ namespace Dust.Language.Compiler
     }
 
     protected override object CompileCallExpression(CallExpression expression)
-    { 
+    {
       return CompileStatements(expression.Function.Statements);
     }
 
@@ -68,7 +68,7 @@ namespace Dust.Language.Compiler
 
       return value;
     }
-    
+
     protected override object CompileBinaryExpression(BinaryExpression expression)
     {
       object left = CompileExpression(expression.Left);
@@ -275,7 +275,7 @@ namespace Dust.Language.Compiler
             break;
         }
       }
-      
+
       return null;
     }
 
