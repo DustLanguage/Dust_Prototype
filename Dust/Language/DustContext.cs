@@ -79,8 +79,11 @@ namespace Dust.Language
       foreach (DustContext context in children)
         action(context);
 
-      foreach (DustContext context in parent?.children)
-        action(context);
+      if (parent != null)
+      {
+        foreach (DustContext context in parent.children)
+          action(context);
+      }
     }
   }
 }

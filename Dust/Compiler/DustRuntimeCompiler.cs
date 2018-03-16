@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Dust.Exceptions;
 using Dust.Language;
 using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
@@ -42,6 +43,16 @@ namespace Dust.Compiler
 
     protected override object CompileCallExpression(CallExpression expression)
     {
+      string name = expression.Function.Name;
+
+      Function function = compilerContext.GetFunction(name);
+
+      if (function == null)
+      {
+        // fix
+        throw new DustSyntaxErrorException($"Function '{name}' is not defined", null);
+      }
+
       return CompileStatements(expression.Function.Statements);
     }
 
