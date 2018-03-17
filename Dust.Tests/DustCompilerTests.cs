@@ -25,9 +25,17 @@ namespace Dust.Tests
     [InlineData("1+2+3+4", 10)]
     [InlineData("12345*678*9", 75329190)]
     [InlineData("4+20+100", 124)]
+    public static void Test_CompileArithmeticOperation(string input, int expected)
+    {
+      Assert.Equal(Compile(input), expected);
+    }
+
+    
+    [Theory]
     [InlineData("7.5*7.5", 56.25f)]
     [InlineData("4/20*100", 20f)]
-    public static void Test_ParseSimpleMultipleArthimeticOperations(string input, int expected)
+    [InlineData("3.14*3.14", 9.859601f)]
+    public static void Test_CompileFloatArithmeticOperation(string input, float expected)
     {
       Assert.Equal(Compile(input), expected);
     }
