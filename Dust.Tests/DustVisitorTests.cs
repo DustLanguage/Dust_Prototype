@@ -43,22 +43,22 @@ namespace Dust.Tests
       Assert.Equal(ParseStatements(input), new ExpressionStatement(new LiteralExpression(expected)));
     }
 
-        [Theory]
-        [InlineData("\"Expression\"", "Expression")]
-        [InlineData("\'Sad Expression\'", "Sad Expression")]
-        [InlineData("\"Dust File Syntax\"", "Dust File Syntax")]
-        public static void Test_ParseString(string input, string expected)
-        {
-            Assert.Equal(ParseStatements(input), new ExpressionStatement(new LiteralExpression(expected)));
-        }
+    [Theory]
+    [InlineData("\"Expression\"", "Expression")]
+    [InlineData("\'Sad Expression\'", "Sad Expression")]
+    [InlineData("\"Dust File Syntax\"", "Dust File Syntax")]
+    public static void Test_ParseString(string input, string expected)
+    {
+        Assert.Equal(ParseStatements(input), new ExpressionStatement(new LiteralExpression(expected)));
+    }
 
-        [Theory]
-        [InlineData("true", true)]
-        [InlineData("false", false)]
-        public static void Test_ParseBoolean(string input, bool expected)
-        {
-            Assert.Equal(ParseStatements(input), new ExpressionStatement(new LiteralExpression(expected)));
-        }
+    [Theory]
+    [InlineData("true", true)]
+    [InlineData("false", false)]
+    public static void Test_ParseBoolean(string input, bool expected)
+    {
+        Assert.Equal(ParseStatements(input), new ExpressionStatement(new LiteralExpression(expected)));
+    }
         
         
 
@@ -69,19 +69,17 @@ namespace Dust.Tests
         [InlineData("1-1", 0f)]
         public static void Test_ParseArthimeticOperation(string input, float expected)
         {
-            string currentValue = "", firstSide = "", secondSide = "";
-            BinaryOperatorType operatorType;
+            string currentValue = "", firstSide = "";
             foreach (char c in input)
             {
                 if (c == '+' || c == '-' || c == '/' || c == '*')
                 {
-                    operatorType = BinaryOperatorTypeHelper.FromString(c.ToString());
+                    var operatorType = BinaryOperatorTypeHelper.FromString(c.ToString());
                     if (firstSide != "")
                     {
-                        secondSide = currentValue;
+                        var secondSide = currentValue;
                         float firstSideFloat = float.Parse(firstSide);
                         float secondSideFloat = float.Parse(secondSide);
-                        // firstSideFloat, operatorType, secondSideFloat
                         Assert.Equal(ParseStatements(input), new ExpressionStatement(new BinaryExpression(new LiteralExpression(firstSideFloat),
                             operatorType, new LiteralExpression(secondSideFloat))));
                     }
@@ -93,17 +91,7 @@ namespace Dust.Tests
                     currentValue = "";
                 }
                 currentValue += c;
-            } 
-  //         
+            }         
         }
     }
-
-    /*[Theory]
-    [InlineData("1+1", new ExpressionStatement(new BinaryExpression(new LiteralExpression(1), BinaryOperatorType.PLUS,
-        new LiteralExpression(1)))]
-    public static void Test_ParseArthimeticOperation(string input, ExpressionStatement expected)
-    {
-        Assert.Equal(ParseStatements(input), expected);
-    }*/
-  }
 }
