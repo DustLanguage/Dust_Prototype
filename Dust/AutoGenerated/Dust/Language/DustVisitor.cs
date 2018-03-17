@@ -198,11 +198,11 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitDeclaration([NotNull] DustParser.DeclarationContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// Visit a parse tree produced by <see cref="DustParser.arithmeticOperator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context);
+	Result VisitArithmeticOperator([NotNull] DustParser.ArithmeticOperatorContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="DustParser.returnStatement"/>.
 	/// </summary>

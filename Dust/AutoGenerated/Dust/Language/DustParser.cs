@@ -46,7 +46,7 @@ public partial class DustParser : Parser {
 		PreProcessorDirective=42, FloatLiteral=43, IntLiteral=44, StringLiteral=45;
 	public const int
 		RULE_module = 0, RULE_statement = 1, RULE_expression = 2, RULE_declaration = 3, 
-		RULE_arthimeticOperator = 4, RULE_returnStatement = 5, RULE_expressionStatement = 6, 
+		RULE_arithmeticOperator = 4, RULE_returnStatement = 5, RULE_expressionStatement = 6, 
 		RULE_propertyDeclaration = 7, RULE_functionDeclarationBase = 8, RULE_functionDeclaration = 9, 
 		RULE_functionName = 10, RULE_functionModifier = 11, RULE_functionParameterList = 12, 
 		RULE_functionFragmentator = 13, RULE_functionParameter = 14, RULE_parameterName = 15, 
@@ -54,7 +54,7 @@ public partial class DustParser : Parser {
 		RULE_literal = 19, RULE_arrayLiteral = 20, RULE_callParameterList = 21, 
 		RULE_callParameter = 22, RULE_eos = 23;
 	public static readonly string[] ruleNames = {
-		"module", "statement", "expression", "declaration", "arthimeticOperator", 
+		"module", "statement", "expression", "declaration", "arithmeticOperator", 
 		"returnStatement", "expressionStatement", "propertyDeclaration", "functionDeclarationBase", 
 		"functionDeclaration", "functionName", "functionModifier", "functionParameterList", 
 		"functionFragmentator", "functionParameter", "parameterName", "memberName", 
@@ -614,8 +614,8 @@ public partial class DustParser : Parser {
 		public ExpressionContext expression(int i) {
 			return GetRuleContext<ExpressionContext>(i);
 		}
-		public ArthimeticOperatorContext arthimeticOperator() {
-			return GetRuleContext<ArthimeticOperatorContext>(0);
+		public ArithmeticOperatorContext arithmeticOperator() {
+			return GetRuleContext<ArithmeticOperatorContext>(0);
 		}
 		public BinaryExpressionContext(ExpressionContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
@@ -823,7 +823,7 @@ public partial class DustParser : Parser {
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
 						State = 84;
 						if (!(Precpred(Context, 14))) throw new FailedPredicateException(this, "Precpred(Context, 14)");
-						State = 85; arthimeticOperator();
+						State = 85; arithmeticOperator();
 						State = 86; expression(15);
 						}
 						break;
@@ -1007,31 +1007,31 @@ public partial class DustParser : Parser {
 		return _localctx;
 	}
 
-	public partial class ArthimeticOperatorContext : ParserRuleContext {
-		public ArthimeticOperatorContext(ParserRuleContext parent, int invokingState)
+	public partial class ArithmeticOperatorContext : ParserRuleContext {
+		public ArithmeticOperatorContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_arthimeticOperator; } }
+		public override int RuleIndex { get { return RULE_arithmeticOperator; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IDustListener typedListener = listener as IDustListener;
-			if (typedListener != null) typedListener.EnterArthimeticOperator(this);
+			if (typedListener != null) typedListener.EnterArithmeticOperator(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IDustListener typedListener = listener as IDustListener;
-			if (typedListener != null) typedListener.ExitArthimeticOperator(this);
+			if (typedListener != null) typedListener.ExitArithmeticOperator(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IDustVisitor<TResult> typedVisitor = visitor as IDustVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitArthimeticOperator(this);
+			if (typedVisitor != null) return typedVisitor.VisitArithmeticOperator(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public ArthimeticOperatorContext arthimeticOperator() {
-		ArthimeticOperatorContext _localctx = new ArthimeticOperatorContext(Context, State);
-		EnterRule(_localctx, 8, RULE_arthimeticOperator);
+	public ArithmeticOperatorContext arithmeticOperator() {
+		ArithmeticOperatorContext _localctx = new ArithmeticOperatorContext(Context, State);
+		EnterRule(_localctx, 8, RULE_arithmeticOperator);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);

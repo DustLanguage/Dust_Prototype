@@ -65,7 +65,7 @@ namespace Dust.Tests
     [InlineData("45.6*32.1", 1463.76f)]
     [InlineData("20.0/5.4", 3.7037037f)]
     [InlineData("1.0-1", 0.0f)]
-    public static void Test_ParseArthimeticOperation(string input, float expected)
+    public static void Test_ParseArithmeticOperation(string input, float expected)
     {
       string currentValue = "", firstSide = "", secondSide = "";
       BinaryOperatorType operatorType;

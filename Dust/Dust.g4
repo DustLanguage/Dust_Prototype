@@ -34,7 +34,7 @@ expression
     | arrayLiteral # ArrayLiteralExpression
     | identifierName # IdentifierExpression
     | expression '.' expression # DotMemberExpression
-    | expression arthimeticOperator expression # BinaryExpression
+    | expression arithmeticOperator expression # BinaryExpression
     | expression '++' # AdditionUnaryExpression
     | expression '--' # SubstractionUnaryExpression
     | expression '**' # MultiplicationUnaryExpression
@@ -51,7 +51,7 @@ expression
 
 declaration: 'let' 'mut'?;
 
-arthimeticOperator: (('*'|'/')|('+'|'-'));
+arithmeticOperator: (('*'|'/')|('+'|'-'));
 
 returnStatement: 'return' expression eos;
 expressionStatement: expression eos;

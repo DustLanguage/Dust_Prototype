@@ -314,15 +314,15 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitDeclaration([NotNull] DustParser.DeclarationContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// Enter a parse tree produced by <see cref="DustParser.arithmeticOperator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context);
+	void EnterArithmeticOperator([NotNull] DustParser.ArithmeticOperatorContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// Exit a parse tree produced by <see cref="DustParser.arithmeticOperator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context);
+	void ExitArithmeticOperator([NotNull] DustParser.ArithmeticOperatorContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.returnStatement"/>.
 	/// </summary>

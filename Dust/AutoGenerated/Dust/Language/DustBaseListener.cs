@@ -366,17 +366,17 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitDeclaration([NotNull] DustParser.DeclarationContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// Enter a parse tree produced by <see cref="DustParser.arithmeticOperator"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context) { }
+	public virtual void EnterArithmeticOperator([NotNull] DustParser.ArithmeticOperatorContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// Exit a parse tree produced by <see cref="DustParser.arithmeticOperator"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context) { }
+	public virtual void ExitArithmeticOperator([NotNull] DustParser.ArithmeticOperatorContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.returnStatement"/>.
 	/// <para>The default implementation does nothing.</para>
