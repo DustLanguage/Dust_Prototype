@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using Antlr4.Runtime;
 using Dust.Compiler;
 using Dust.Language;
@@ -10,6 +12,8 @@ namespace Dust.CLI
   {
     private static void Main(string[] args)
     {
+      Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+      
       DustContext context = new DustContext();
       DustRuntimeCompiler compiler = new DustRuntimeCompiler(context);
 

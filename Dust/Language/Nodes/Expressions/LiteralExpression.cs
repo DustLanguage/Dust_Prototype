@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 
 namespace Dust.Language.Nodes.Expressions
 {
@@ -28,7 +30,7 @@ namespace Dust.Language.Nodes.Expressions
 
     public static LiteralExpression ParseFloat(string text)
     {
-      if (!float.TryParse(text, out float number))
+      if (!float.TryParse(text, NumberStyles.Any, CultureInfo.CurrentUICulture, out float number))
       {
         throw new Exception($"Could not parse float {text}");
       }
