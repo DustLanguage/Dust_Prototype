@@ -252,6 +252,11 @@ namespace Dust.Compiler
 
       if (expression.Expression is IdentifierExpression identifierExpression)
       {
+        if (compilerContext.ContainsPropety(identifierExpression.Name) == false)
+        {
+          throw new DustSyntaxErrorException($"Identifier '{identifierExpression.Name}' is not defined", null);
+        }
+
         compilerContext.DeleteProperty(identifierExpression);
 
         return null;
@@ -259,6 +264,11 @@ namespace Dust.Compiler
 
       if (expression.Expression is Function function)
       {
+        if (compilerContext.ContainsFunction(function.Name) == false)
+        {
+          throw new DustSyntaxErrorException($"Function '{function.Name}' is not defined", null);
+        }
+
         compilerContext.DeleteFunction(function);
 
         return null;
