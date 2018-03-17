@@ -61,10 +61,10 @@ namespace Dust.Tests
     }
 
     [Theory]
-    [InlineData("1+1", 2f)]
-    [InlineData("1*1", 1f)]
-    [InlineData("2/1", 2f)]
-    [InlineData("1-1", 0f)]
+    [InlineData("123+456", 579.0f)]
+    [InlineData("45.6*32.1", 1463.76f)]
+    [InlineData("20.0/5.4", 3.7037037f)]
+    [InlineData("1.0-1", 0.0f)]
     public static void Test_ParseArthimeticOperation(string input, float expected)
     {
       string currentValue = "", firstSide = "", secondSide = "";
