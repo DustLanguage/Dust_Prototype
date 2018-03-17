@@ -8,7 +8,18 @@ namespace Dust.Language.Nodes.Expressions
     public BinaryOperatorType Operator { get; }
     public Expression Right { get; }
 
-    public override DustType Type => DustType.Bool;
+    public override DustType Type
+    {
+      get
+      {
+        if (Left.Type == DustType.Float || Right.Type == DustType.Float)
+        {
+          return DustType.Float;
+        }
+        
+        return DustType.Int;
+      }
+    }
 
     public BinaryExpression(Expression left, BinaryOperatorType @operator, Expression right)
     {

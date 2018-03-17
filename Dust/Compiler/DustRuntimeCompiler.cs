@@ -7,7 +7,7 @@ using Dust.Language.Nodes.Expressions;
 using Dust.Language.Nodes.Statements;
 using Dust.Language.Types;
 
-//222222+3445432+6546/566*4555
+// 222222+3445432+6546/566*4555
 
 namespace Dust.Compiler
 {
