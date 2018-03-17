@@ -34,13 +34,10 @@ expression
     | arrayLiteral # ArrayLiteralExpression
     | identifierName # IdentifierExpression
     | expression '.' expression # DotMemberExpression
-    | expression '+' expression # AdditionBinaryExpression
+    | expression arthimeticOperator expression # BinaryExpression
     | expression '++' # AdditionUnaryExpression
-    | expression '-' expression # SubstractionBinaryExpression
     | expression '--' # SubstractionUnaryExpression
-    | expression '*' expression # MultiplicationBinaryExpression
     | expression '**' # MultiplicationUnaryExpression
-    | expression '/' expression # DivisionBinaryExpression
     | expression '//' # DivisionUnaryExpression
     | expression '==' expression # EqualBinaryExpression
     | expression '!=' expression # NotEqualBinaryExpression
@@ -53,6 +50,8 @@ expression
     | literal # LiteralExpression;
 
 declaration: 'let' 'mut'?;
+
+arthimeticOperator: (('*'|'/')|('+'|'-'));
 
 returnStatement: 'return' expression eos;
 expressionStatement: expression eos;

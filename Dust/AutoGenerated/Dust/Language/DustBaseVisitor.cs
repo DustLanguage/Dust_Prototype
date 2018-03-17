@@ -121,17 +121,6 @@ public partial class DustBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <return>The visitor result.</return>
 	public virtual Result VisitDotMemberExpression([NotNull] DustParser.DotMemberExpressionContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by the <c>DivisionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitDivisionBinaryExpression([NotNull] DustParser.DivisionBinaryExpressionContext context) { return VisitChildren(context); }
-	/// <summary>
 	/// Visit a parse tree produced by the <c>LiteralExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>
@@ -220,17 +209,6 @@ public partial class DustBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <return>The visitor result.</return>
 	public virtual Result VisitGroupExpression([NotNull] DustParser.GroupExpressionContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by the <c>MultiplicationBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitMultiplicationBinaryExpression([NotNull] DustParser.MultiplicationBinaryExpressionContext context) { return VisitChildren(context); }
-	/// <summary>
 	/// Visit a parse tree produced by the <c>IdentifierExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>
@@ -264,7 +242,7 @@ public partial class DustBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <return>The visitor result.</return>
 	public virtual Result VisitDivisionUnaryExpression([NotNull] DustParser.DivisionUnaryExpressionContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by the <c>AdditionBinaryExpression</c>
+	/// Visit a parse tree produced by the <c>BinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -273,7 +251,7 @@ public partial class DustBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitAdditionBinaryExpression([NotNull] DustParser.AdditionBinaryExpressionContext context) { return VisitChildren(context); }
+	public virtual Result VisitBinaryExpression([NotNull] DustParser.BinaryExpressionContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by the <c>AssignmentExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
@@ -297,17 +275,6 @@ public partial class DustBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <return>The visitor result.</return>
 	public virtual Result VisitSmallerEqualBinaryExpression([NotNull] DustParser.SmallerEqualBinaryExpressionContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by the <c>SubstractionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context) { return VisitChildren(context); }
-	/// <summary>
 	/// Visit a parse tree produced by the <c>CallExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>
@@ -328,6 +295,16 @@ public partial class DustBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitDeclaration([NotNull] DustParser.DeclarationContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="DustParser.returnStatement"/>.
 	/// <para>

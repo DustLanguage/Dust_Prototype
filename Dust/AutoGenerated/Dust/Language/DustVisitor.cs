@@ -87,13 +87,6 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitDotMemberExpression([NotNull] DustParser.DotMemberExpressionContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>DivisionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitDivisionBinaryExpression([NotNull] DustParser.DivisionBinaryExpressionContext context);
-	/// <summary>
 	/// Visit a parse tree produced by the <c>LiteralExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
@@ -150,13 +143,6 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitGroupExpression([NotNull] DustParser.GroupExpressionContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>MultiplicationBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitMultiplicationBinaryExpression([NotNull] DustParser.MultiplicationBinaryExpressionContext context);
-	/// <summary>
 	/// Visit a parse tree produced by the <c>IdentifierExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
@@ -178,12 +164,12 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitDivisionUnaryExpression([NotNull] DustParser.DivisionUnaryExpressionContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>AdditionBinaryExpression</c>
+	/// Visit a parse tree produced by the <c>BinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitAdditionBinaryExpression([NotNull] DustParser.AdditionBinaryExpressionContext context);
+	Result VisitBinaryExpression([NotNull] DustParser.BinaryExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>AssignmentExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
@@ -199,13 +185,6 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitSmallerEqualBinaryExpression([NotNull] DustParser.SmallerEqualBinaryExpressionContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>SubstractionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context);
-	/// <summary>
 	/// Visit a parse tree produced by the <c>CallExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
@@ -218,6 +197,12 @@ public interface IDustVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitDeclaration([NotNull] DustParser.DeclarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="DustParser.returnStatement"/>.
 	/// </summary>

@@ -124,18 +124,6 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitDotMemberExpression([NotNull] DustParser.DotMemberExpressionContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>DivisionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDivisionBinaryExpression([NotNull] DustParser.DivisionBinaryExpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>DivisionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDivisionBinaryExpression([NotNull] DustParser.DivisionBinaryExpressionContext context);
-	/// <summary>
 	/// Enter a parse tree produced by the <c>LiteralExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
@@ -232,18 +220,6 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitGroupExpression([NotNull] DustParser.GroupExpressionContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>MultiplicationBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterMultiplicationBinaryExpression([NotNull] DustParser.MultiplicationBinaryExpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>MultiplicationBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitMultiplicationBinaryExpression([NotNull] DustParser.MultiplicationBinaryExpressionContext context);
-	/// <summary>
 	/// Enter a parse tree produced by the <c>IdentifierExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
@@ -280,17 +256,17 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitDivisionUnaryExpression([NotNull] DustParser.DivisionUnaryExpressionContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>AdditionBinaryExpression</c>
+	/// Enter a parse tree produced by the <c>BinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterAdditionBinaryExpression([NotNull] DustParser.AdditionBinaryExpressionContext context);
+	void EnterBinaryExpression([NotNull] DustParser.BinaryExpressionContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>AdditionBinaryExpression</c>
+	/// Exit a parse tree produced by the <c>BinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitAdditionBinaryExpression([NotNull] DustParser.AdditionBinaryExpressionContext context);
+	void ExitBinaryExpression([NotNull] DustParser.BinaryExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>AssignmentExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
@@ -316,18 +292,6 @@ public interface IDustListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitSmallerEqualBinaryExpression([NotNull] DustParser.SmallerEqualBinaryExpressionContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>SubstractionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>SubstractionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context);
-	/// <summary>
 	/// Enter a parse tree produced by the <c>CallExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// </summary>
@@ -349,6 +313,16 @@ public interface IDustListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitDeclaration([NotNull] DustParser.DeclarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.returnStatement"/>.
 	/// </summary>

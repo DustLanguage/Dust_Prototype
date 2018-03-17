@@ -144,20 +144,6 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitDotMemberExpression([NotNull] DustParser.DotMemberExpressionContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by the <c>DivisionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDivisionBinaryExpression([NotNull] DustParser.DivisionBinaryExpressionContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>DivisionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDivisionBinaryExpression([NotNull] DustParser.DivisionBinaryExpressionContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by the <c>LiteralExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -270,20 +256,6 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitGroupExpression([NotNull] DustParser.GroupExpressionContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by the <c>MultiplicationBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterMultiplicationBinaryExpression([NotNull] DustParser.MultiplicationBinaryExpressionContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>MultiplicationBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitMultiplicationBinaryExpression([NotNull] DustParser.MultiplicationBinaryExpressionContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by the <c>IdentifierExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -326,19 +298,19 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitDivisionUnaryExpression([NotNull] DustParser.DivisionUnaryExpressionContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by the <c>AdditionBinaryExpression</c>
+	/// Enter a parse tree produced by the <c>BinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterAdditionBinaryExpression([NotNull] DustParser.AdditionBinaryExpressionContext context) { }
+	public virtual void EnterBinaryExpression([NotNull] DustParser.BinaryExpressionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by the <c>AdditionBinaryExpression</c>
+	/// Exit a parse tree produced by the <c>BinaryExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitAdditionBinaryExpression([NotNull] DustParser.AdditionBinaryExpressionContext context) { }
+	public virtual void ExitBinaryExpression([NotNull] DustParser.BinaryExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by the <c>AssignmentExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
@@ -368,20 +340,6 @@ public partial class DustBaseListener : IDustListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitSmallerEqualBinaryExpression([NotNull] DustParser.SmallerEqualBinaryExpressionContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by the <c>SubstractionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>SubstractionBinaryExpression</c>
-	/// labeled alternative in <see cref="DustParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitSubstractionBinaryExpression([NotNull] DustParser.SubstractionBinaryExpressionContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by the <c>CallExpression</c>
 	/// labeled alternative in <see cref="DustParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -407,6 +365,18 @@ public partial class DustBaseListener : IDustListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitDeclaration([NotNull] DustParser.DeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="DustParser.arthimeticOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArthimeticOperator([NotNull] DustParser.ArthimeticOperatorContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="DustParser.returnStatement"/>.
 	/// <para>The default implementation does nothing.</para>

@@ -52,24 +52,9 @@ namespace Dust.Language
       return LiteralExpression.ParseBool(context.GetText());
     }
 
-    public override Node VisitAdditionBinaryExpression(DustParser.AdditionBinaryExpressionContext context)
+    public override Node VisitBinaryExpression(DustParser.BinaryExpressionContext context)
     {
-      return CreateBinaryExpression(context, context.expression(0), "+", context.expression(1));
-    }
-
-    public override Node VisitSubstractionBinaryExpression(DustParser.SubstractionBinaryExpressionContext context)
-    {
-      return CreateBinaryExpression(context, context.expression(0), "-", context.expression(1));
-    }
-
-    public override Node VisitMultiplicationBinaryExpression(DustParser.MultiplicationBinaryExpressionContext context)
-    {
-      return CreateBinaryExpression(context, context.expression(0), "*", context.expression(1));
-    }
-
-    public override Node VisitDivisionBinaryExpression(DustParser.DivisionBinaryExpressionContext context)
-    {
-      return CreateBinaryExpression(context, context.expression(0), "/", context.expression(1));
+      return CreateBinaryExpression(context, context.expression(0), context.arthimeticOperator().GetText(), context.expression(1));
     }
 
     public override Node VisitAdditionUnaryExpression(DustParser.AdditionUnaryExpressionContext context)
