@@ -27,7 +27,7 @@ namespace Dust.Language
 
     public IdentifierExpression GetProperty(string name)
     {
-      return properties.Get(element => element.Name == name);
+      return properties.Get(element => element.Name == name) ?? parent?.GetProperty(name);
     }
 
     public void AddProperty(IdentifierExpression property, object value)
