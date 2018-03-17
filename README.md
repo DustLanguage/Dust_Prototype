@@ -1,4 +1,4 @@
-# Dust [![Gitter room](https://badges.gitter.im/DustLanguage.png)](https://gitter.im/DustLanguage)
+# Dust [![Build Status](https://travis-ci.org/DustLanguage/Dust.svg?branch=master)](https://travis-ci.org/DustLanguage/Dust) [![Gitter room](https://badges.gitter.im/DustLanguage.png)](https://gitter.im/DustLanguage)
 
 Dust is an open source programming language written in C# with .NET Core.
 
