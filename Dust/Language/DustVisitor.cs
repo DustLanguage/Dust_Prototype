@@ -228,11 +228,6 @@ namespace Dust.Language
         throw new DustSyntaxErrorException($"Function '{name}' is not defined", context.functionName().GetRange());
       }
 
-      if (function == null)
-      {
-        throw new DustSyntaxErrorException($"Function '{name}' is not defined", context.functionName().GetRange());
-      }
-
       if (function.Parameters.Length != parameters.Length)
       {
         throw new DustSyntaxErrorException($"Function '{function.Name}' has {function.Parameters.Length} parameters but is called with {parameters.Length}", context.callParameterList().GetRange());
@@ -354,6 +349,15 @@ namespace Dust.Language
 
       UnaryOperatorType operatorType = UnaryOperatorTypeHelper.FromString(@operator);
 
+      if (expression is IdentifierExpression || expression is Function)
+      {
+        switch (operatorType)
+        {
+          case UnaryOperatorType.DELETE:
+            return new UnaryExpression(expression, operatorType);
+        }
+      }
+
       if (expression.Type == DustType.Number)
       {
         switch (operatorType)
@@ -371,15 +375,6 @@ namespace Dust.Language
         switch (operatorType)
         {
           case UnaryOperatorType.BANG:
-            return new UnaryExpression(expression, operatorType);
-        }
-      }
-
-      if (expression is IdentifierExpression || expression is Function)
-      {
-        switch (operatorType)
-        {
-          case UnaryOperatorType.DELETE:
             return new UnaryExpression(expression, operatorType);
         }
       }

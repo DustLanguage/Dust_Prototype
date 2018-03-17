@@ -66,7 +66,11 @@ namespace Dust.Language.Types
           if (@object == null)
           {
             throw new Exception($"Object is null.");
-          } else throw new Exception($"Could not find type for {@object.GetType()}");
+          } 
+          else
+          {
+            throw new Exception($"Could not find type for {@object.GetType()}");
+          }
       }
     }
 

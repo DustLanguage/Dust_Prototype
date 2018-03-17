@@ -37,11 +37,6 @@ namespace Dust.Language
       properties.Add(property);
     }
 
-    public void SetProperty(IdentifierExpression property, object value)
-    {
-      properties.Get(property).Value = value;
-    }
-
     public bool ContainsPropety(string name)
     {
       return GetProperty(name) != null;
@@ -49,8 +44,8 @@ namespace Dust.Language
 
     public void DeleteProperty(IdentifierExpression property)
     {
+      InvokeOnAllChildren(context => context.DeleteProperty(property));
       properties.Remove(property);
-      parent?.properties.Remove(property);
     }
 
     public void AddFunction(Function function)
@@ -70,19 +65,23 @@ namespace Dust.Language
 
     public void DeleteFunction(Function function)
     {
-      DoActionInChildren(context => context.DeleteFunction(function));
+      InvokeOnAllChildren(context => context.DeleteFunction(function));
       functions.Remove(function);
     }
 
-    private void DoActionInChildren(Action<DustContext> action)
+    private void InvokeOnAllChildren(Action<DustContext> action)
     {
       foreach (DustContext context in children)
-        action(context);
-
+      {
+        action(context);        
+      }
+      
       if (parent != null)
       {
         foreach (DustContext context in parent.children)
-          action(context);
+        {
+          action(context);          
+        }
       }
     }
   }
