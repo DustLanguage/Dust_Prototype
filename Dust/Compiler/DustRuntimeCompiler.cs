@@ -204,10 +204,12 @@ namespace Dust.Compiler
 
             return Convert.ToSingle(left) * Convert.ToSingle(right);
           case BinaryOperatorType.DIVIDE:
-            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int)
-              return (int) left / (int) right;
+            float result = Convert.ToSingle(left) / Convert.ToSingle(right);
 
-            return Convert.ToSingle(left) / Convert.ToSingle(right);
+            if (DustType.GetDustType(left) == DustType.Int && DustType.GetDustType(right) == DustType.Int && result % 10 == 0)
+              return (int) result;
+
+            return result;
         }
       }
 
