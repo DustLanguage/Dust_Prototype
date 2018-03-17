@@ -54,7 +54,7 @@ namespace Dust.Language
 
     public override Node VisitBinaryExpression(DustParser.BinaryExpressionContext context)
     {
-      return CreateBinaryExpression(context, context.expression(0), context.arthimeticOperator().GetText(), context.expression(1));
+      return CreateBinaryExpression(context, context.expression(0), context.arithmeticOperator().GetText(), context.expression(1));
     }
 
     public override Node VisitAdditionUnaryExpression(DustParser.AdditionUnaryExpressionContext context)
