@@ -9,8 +9,8 @@ namespace Dust.Extensions
     {
       return new Range
       {
-        start = new Position {line = context.Start.Line - 1, character = context.Start.Column},
-        end = new Position {line = context.Stop.Line - 1, character = context.Stop.Column}
+        Start = new Position {Line = context.Start.Line - 1, Character = context.Start.Column},
+        End = new Position {Line = context.Stop.Line - 1, Character = context.Stop.Column}
       };
     }
   }
