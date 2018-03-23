@@ -5,7 +5,7 @@ LineTerminator: [\r\n\u2028\u2029] -> channel(HIDDEN);
 SemiColon: ';';
 
 MultiLineComment: '#*' .*? '*#' -> channel(HIDDEN);
-SingleLineComment: '#' .*? -> channel(HIDDEN);
+SingleLineComment: '#' ~[\r\n\u2028\u2029]* -> channel(HIDDEN);
 
 Function: 'fn';
 
