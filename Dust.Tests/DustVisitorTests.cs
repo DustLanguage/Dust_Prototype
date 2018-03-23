@@ -61,11 +61,11 @@ namespace Dust.Tests
     }
 
     [Theory]
-    [InlineData("123+456", 579.0f)]
-    [InlineData("45.6*32.1", 1463.76f)]
-    [InlineData("20.0/5.4", 3.7037037f)]
-    [InlineData("1.0-1", 0.0f)]
-    public static void Test_ParseArithmeticOperation(string input, float expected)
+    [InlineData("123+456")]
+    [InlineData("45.6*32.1")]
+    [InlineData("20.0/5.4")]
+    [InlineData("1.0-1")]
+    public static void Test_ParseArithmeticOperation(string input)
     {
       string currentValue = "", firstSide = "";
       foreach (char c in input)
@@ -78,7 +78,6 @@ namespace Dust.Tests
             string secondSide = currentValue;
             float firstSideFloat = float.Parse(firstSide);
             float secondSideFloat = float.Parse(secondSide);
-            // firstSideFloat, operatorType, secondSideFloat
             Assert.Equal(ParseStatements(input), new ExpressionStatement(new BinaryExpression(new LiteralExpression(firstSideFloat),
               operatorType, new LiteralExpression(secondSideFloat))));
           }
