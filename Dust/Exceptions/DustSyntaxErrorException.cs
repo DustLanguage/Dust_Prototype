@@ -8,7 +8,7 @@ namespace Dust.Exceptions
     public Range Range { get; }    
     
     public DustSyntaxErrorException(string message, Range range)
-      : base(message)
+      : base($"{range.Start.Line}:{range.Start.Character} {message}")
     {
       Range = range;
     }
