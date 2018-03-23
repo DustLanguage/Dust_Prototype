@@ -182,7 +182,8 @@ namespace Dust.Language
 
           if (statement is ReturnStatement returnStatement)
           {
-            returnType = returnStatement.Expression.Type;
+            // This is a temporary HACK until type system.
+            returnType = DustType.Number;
           }
 
           statements.Add(statement);
