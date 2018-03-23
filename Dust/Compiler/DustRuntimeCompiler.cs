@@ -29,7 +29,7 @@ namespace Dust.Compiler
     {
       object value = CompileExpression(statement.Initializer);
 
-      compilerContext.AddProperty(statement.Identifier, value);
+      CompilerContext.SetProperty(statement.Identifier, value);
 
       return value;
     }
@@ -43,7 +43,7 @@ namespace Dust.Compiler
     {
       string name = expression.Function.Name;
 
-      Function function = compilerContext.GetFunction(name);
+      Function function = CompilerContext.GetFunction(name);
 
       if (function == null)
       {
@@ -252,24 +252,24 @@ namespace Dust.Compiler
 
       if (expression.Expression is IdentifierExpression identifierExpression)
       {
-        if (compilerContext.ContainsPropety(identifierExpression.Name) == false)
+        if (CompilerContext.ContainsPropety(identifierExpression.Name) == false)
         {
           throw new DustSyntaxErrorException($"Identifier '{identifierExpression.Name}' is not defined", null);
         }
 
-        compilerContext.DeleteProperty(identifierExpression);
+        CompilerContext.DeleteProperty(identifierExpression);
 
         return null;
       }
 
       if (expression.Expression is Function function)
       {
-        if (compilerContext.ContainsFunction(function.Name) == false)
+        if (CompilerContext.ContainsFunction(function.Name) == false)
         {
           throw new DustSyntaxErrorException($"Function '{function.Name}' is not defined", null);
         }
 
-        compilerContext.DeleteFunction(function);
+        CompilerContext.DeleteFunction(function);
 
         return null;
       }
