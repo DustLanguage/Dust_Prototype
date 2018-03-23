@@ -67,16 +67,15 @@ namespace Dust.Tests
     [InlineData("1.0-1", 0.0f)]
     public static void Test_ParseArithmeticOperation(string input, float expected)
     {
-      string currentValue = "", firstSide = "", secondSide = "";
-      BinaryOperatorType operatorType;
+      string currentValue = "", firstSide = "";
       foreach (char c in input)
       {
         if (c == '+' || c == '-' || c == '/' || c == '*')
         {
-          operatorType = BinaryOperatorTypeHelper.FromString(c.ToString());
+          var operatorType = BinaryOperatorTypeHelper.FromString(c.ToString());
           if (firstSide != "")
           {
-            secondSide = currentValue;
+            string secondSide = currentValue;
             float firstSideFloat = float.Parse(firstSide);
             float secondSideFloat = float.Parse(secondSide);
             // firstSideFloat, operatorType, secondSideFloat

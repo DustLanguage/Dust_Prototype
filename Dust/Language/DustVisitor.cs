@@ -180,9 +180,9 @@ namespace Dust.Language
         {
           Statement statement = (Statement) child.Visit(statementContext);
 
-          if (statement is ReturnStatement returnStatement)
+          if (statement is ReturnStatement)
           {
-            // This is a temporary HACK until type system.
+            // TODO: Fix the temporary HACK by creating a Type System.
             returnType = DustType.Number;
           }
 
