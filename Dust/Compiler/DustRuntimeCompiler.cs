@@ -36,8 +36,6 @@ namespace Dust.Compiler
 
     protected override object CompileFunctionDeclaration(FunctionDeclaration statement)
     {
-      compilerContext.AddFunction(statement.Function);
-
       return null;
     }
 

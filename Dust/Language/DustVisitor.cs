@@ -133,7 +133,11 @@ namespace Dust.Language
         throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.identifierName().GetRange());
       }
 
-      return new PropertyDeclaration(initializer, new IdentifierExpression(name, isMutable));
+      IdentifierExpression identifier = new IdentifierExpression(name, isMutable);
+
+      visitorContext.AddProperty(identifier);
+
+      return new PropertyDeclaration(initializer, identifier);
     }
 
     public override Node VisitFunctionParameter(DustParser.FunctionParameterContext context)
@@ -185,7 +189,11 @@ namespace Dust.Language
         }
       }
 
-      return new FunctionDeclaration(name, modifiers, parameters ?? new FunctionParameter[0], statements.ToArray(), returnType);
+      FunctionDeclaration declaration = new FunctionDeclaration(name, modifiers, parameters ?? new FunctionParameter[0], statements.ToArray(), returnType);
+      
+      visitorContext.AddFunction(declaration.Function);
+
+      return declaration;
     }
 
     public override Node VisitReturnStatement(DustParser.ReturnStatementContext context)
@@ -260,7 +268,8 @@ namespace Dust.Language
 
       foreach (FunctionParameter property in predefindProperties)
       {
-        visitor.visitorContext.AddProperty(property.Identifier, null);
+        // fixme
+        visitor.visitorContext.AddProperty(property.Identifier);
       }
 
       return visitor;
