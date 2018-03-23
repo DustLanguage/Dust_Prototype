@@ -1,12 +1,14 @@
-﻿namespace Dust.Language.Nodes
+﻿using Dust.Language.Nodes.Expressions;
+
+namespace Dust.Language.Nodes
 {
   public class CallParameter : Node
   {
-    public string Name { get; }
+    public Expression Expression { get; }
     
-    public CallParameter(string name)
+    public CallParameter(Expression expression)
     {
-      Name = name;
+      Expression = expression;
     }
   }
 }

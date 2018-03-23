@@ -7,9 +7,9 @@ namespace Dust.Language.Nodes.Statements
   {
     public Function Function { get; }
  
-    public FunctionDeclaration(string name, FunctionModifier[] modifiers, FunctionParameter[] parameters, Statement[] statements, DustType returnType)
+    public FunctionDeclaration(string name, FunctionModifier[] modifiers, FunctionParameter[] parameters, Statement[] statements, DustType returnType, DustContext context)
     {
-      Function = new Function(name, modifiers, parameters, statements, returnType);
+      Function = new Function(name, modifiers, parameters, statements, returnType, context);
     }
   }
 }

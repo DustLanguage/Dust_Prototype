@@ -51,6 +51,11 @@ namespace Dust.Compiler
         throw new DustSyntaxErrorException($"Function '{name}' is not defined", null);
       }
 
+      for (int i = 0; i < expression.Parameters.Length; i++)
+      {
+        expression.Function.Context.SetProperty(function.Parameters[i].Identifier, CompileExpression(expression.Parameters[i].Expression));
+      }
+
       return CompileStatements(expression.Function.Statements);
     }
 

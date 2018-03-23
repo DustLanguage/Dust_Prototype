@@ -189,8 +189,8 @@ namespace Dust.Language
         }
       }
 
-      FunctionDeclaration declaration = new FunctionDeclaration(name, modifiers, parameters ?? new FunctionParameter[0], statements.ToArray(), returnType);
-      
+      FunctionDeclaration declaration = new FunctionDeclaration(name, modifiers, parameters ?? new FunctionParameter[0], statements.ToArray(), returnType, child.visitorContext);
+
       visitorContext.AddFunction(declaration.Function);
 
       return declaration;
@@ -205,9 +205,7 @@ namespace Dust.Language
 
     public override Node VisitCallParameter(DustParser.CallParameterContext context)
     {
-      string name = context.GetText();
-
-      return new CallParameter(name);
+      return new CallParameter((Expression) Visit(context.expression()));
     }
 
     public override Node VisitCallExpression(DustParser.CallExpressionContext context)
