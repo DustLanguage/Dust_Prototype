@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Dust.Exceptions;
 using Dust.Language;
+using Dust.Language.Errors;
 using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
 using Dust.Language.Nodes.Statements;
@@ -47,8 +47,9 @@ namespace Dust.Compiler
 
       if (function == null)
       {
-        // fix
-        throw new DustSyntaxErrorException($"Function '{name}' is not defined", null);
+        CompilerContext.ErrorHandler.ThrowError(new SyntaxError($"Function '{name}' is not defined", null));
+
+        return null;
       }
 
       for (int i = 0; i < expression.Parameters.Length; i++)
@@ -259,7 +260,9 @@ namespace Dust.Compiler
       {
         if (CompilerContext.ContainsPropety(identifierExpression.Name) == false)
         {
-          throw new DustSyntaxErrorException($"Identifier '{identifierExpression.Name}' is not defined", null);
+          CompilerContext.ErrorHandler.ThrowError(new SyntaxError($"Identifier '{identifierExpression.Name}' is not defined", null));
+
+          return null;
         }
 
         CompilerContext.DeleteProperty(identifierExpression);
@@ -271,7 +274,9 @@ namespace Dust.Compiler
       {
         if (CompilerContext.ContainsFunction(function.Name) == false)
         {
-          throw new DustSyntaxErrorException($"Function '{function.Name}' is not defined", null);
+          CompilerContext.ErrorHandler.ThrowError(new SyntaxError($"Function '{function.Name}' is not defined", null));
+
+          return null;
         }
 
         CompilerContext.DeleteFunction(function);

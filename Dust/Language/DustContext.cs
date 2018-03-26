@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dust.Extensions;
+using Dust.Language.Errors;
 using Dust.Language.Nodes.Expressions;
 
 namespace Dust.Language
@@ -10,12 +11,15 @@ namespace Dust.Language
     public List<IdentifierExpression> Properties { get; } = new List<IdentifierExpression>();
     public List<Function> Functions { get; } = new List<Function>();
 
+    public ErrorHandler ErrorHandler { get; }
+    
     private readonly DustContext parent;
 
     private List<DustContext> children = new List<DustContext>();
 
     public DustContext()
     {
+      ErrorHandler = new ErrorHandler();
     }
 
     public DustContext(DustContext parent)
@@ -23,6 +27,8 @@ namespace Dust.Language
       this.parent = parent;
 
       children.Add(this);
+      ErrorHandler = parent.ErrorHandler;
+      
     }
 
     public IdentifierExpression GetProperty(string name)

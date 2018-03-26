@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Dust.Exceptions;
 using Dust.Extensions;
+using Dust.Language.Errors;
 using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
 using Dust.Language.Nodes.Statements;
@@ -16,6 +16,7 @@ namespace Dust.Language
     public DustVisitor(DustContext visitorContext)
     {
       this.visitorContext = visitorContext;
+      visitorContext.ErrorHandler.Clear();
     }
 
     public override Node VisitModule(DustParser.ModuleContext context)
@@ -130,7 +131,9 @@ namespace Dust.Language
 
       if (visitorContext.ContainsPropety(name))
       {
-        throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.identifierName().GetRange());
+        visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Identifier '{name}' is already defined", context.identifierName().GetRange()));
+
+        return null;
       }
 
       IdentifierExpression identifier = new IdentifierExpression(name, isMutable);
@@ -157,15 +160,18 @@ namespace Dust.Language
 
       if (visitorContext.ContainsPropety(name))
       {
-        throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.functionDeclarationBase().functionName().GetRange());
+        visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Identifier '{name}' is already defined", context.functionDeclarationBase().functionName().GetRange()));
+
+        return null;
       }
 
       for (int i = 0; i < parameters?.Length; i++)
       {
         if (visitorContext.ContainsPropety(parameters[i].Identifier.Name))
         {
-          // Needs testing
-          throw new DustSyntaxErrorException($"Identifier '{name}' is already defined", context.functionParameterList().functionParameter(i).GetRange());
+          visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Identifier '{name}' is already defined", context.functionParameterList().functionParameter(i).GetRange()));
+
+          return null;
         }
       }
 
@@ -217,12 +223,16 @@ namespace Dust.Language
 
       if (function == null)
       {
-        throw new DustSyntaxErrorException($"Function '{name}' is not defined", context.functionName().GetRange());
+        visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Function '{name}' is not defined", context.functionName().GetRange()));
+
+        return null;
       }
 
       if (function.Parameters.Length != parameters.Length)
       {
-        throw new DustSyntaxErrorException($"Function '{function.Name}' has {function.Parameters.Length} parameters but is called with {parameters.Length}", context.callParameterList().GetRange());
+        visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Function '{function.Name}' has {function.Parameters.Length} parameters but is called with {parameters.Length}", context.callParameterList().GetRange()));
+
+        return null;
       }
 
       return new CallExpression(function, parameters);
@@ -236,7 +246,9 @@ namespace Dust.Language
 
       if (property == null && function == null)
       {
-        throw new DustSyntaxErrorException($"Identifier '{name}' is not defined", context.GetRange());
+        visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Identifier '{name}' is not defined", context.GetRange()));
+
+        return null;
       }
 
       if (property == null)
@@ -315,7 +327,9 @@ namespace Dust.Language
         }
       }
 
-      throw new DustSyntaxErrorException($"Cannot apply operator '{BinaryOperatorTypeHelper.ToString(operatorType)}' to operands of type '{left.Type}' and '{right.Type}'", context.GetRange());
+      visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Cannot apply operator '{BinaryOperatorTypeHelper.ToString(operatorType)}' to operands of type '{left.Type}' and '{right.Type}'", context.GetRange()));
+
+      return null;
     }
 
     public override Node VisitAssignmentExpression(DustParser.AssignmentExpressionContext context)
@@ -325,12 +339,16 @@ namespace Dust.Language
 
       if (!(left is IdentifierExpression))
       {
-        throw new DustSyntaxErrorException("Assignment target must be a mutable property.", context.GetRange());
+        visitorContext.ErrorHandler.ThrowError(new SyntaxError("Assignment target must be a mutable property.", context.GetRange()));
+
+        return null;
       }
 
       if (!((IdentifierExpression) left).IsMutable)
       {
-        throw new DustSyntaxErrorException($"'{((IdentifierExpression) left).Name}' is not mutable.", context.GetRange());
+        visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Property '{((IdentifierExpression) left).Name}' is not mutable.", context.GetRange()));
+
+        return null;
       }
 
       return new AssignmentExpression(left, right);
@@ -372,7 +390,9 @@ namespace Dust.Language
         }
       }
 
-      throw new DustSyntaxErrorException($"Cannot apply operator '{UnaryOperatorTypeHelper.ToString(operatorType)}' to operand of type '{expression.Type}'", context.GetRange());
+      visitorContext.ErrorHandler.ThrowError(new SyntaxError($"Cannot apply operator '{UnaryOperatorTypeHelper.ToString(operatorType)}' to operand of type '{expression.Type}'", context.GetRange()));
+
+      return null;
     }
   }
 }

@@ -22,7 +22,7 @@ namespace Dust.Compiler
       return default(T);
     }
 
-    public virtual T CompileStatements(Statement[] statements)
+    protected virtual T CompileStatements(Statement[] statements)
     {
       return statements.Length == 0 ? default(T) : CombineStatements(statements.Select(CompileStatement).ToArray());
     }
