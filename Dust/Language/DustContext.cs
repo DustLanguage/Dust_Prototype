@@ -15,7 +15,7 @@ namespace Dust.Language
     
     private readonly DustContext parent;
 
-    private List<DustContext> children = new List<DustContext>();
+    public List<DustContext> Children { get; } = new List<DustContext>();
 
     public DustContext()
     {
@@ -25,10 +25,9 @@ namespace Dust.Language
     public DustContext(DustContext parent)
     {
       this.parent = parent;
-
-      children.Add(this);
       ErrorHandler = parent.ErrorHandler;
       
+      parent.Children.Add(this);
     }
 
     public IdentifierExpression GetProperty(string name)
@@ -80,16 +79,15 @@ namespace Dust.Language
 
     private void InvokeOnAllChildren(Action<DustContext> action)
     {
-      foreach (DustContext context in children)
-      {
-        action(context);
-      }
 
-      if (parent != null)
+      if (parent != null && parent != this)
       {
-        foreach (DustContext context in parent.children)
+        foreach (DustContext context in parent.Children)
         {
-          action(context);
+          if (context != this)
+          {
+            action(context);            
+          }
         }
       }
     }
