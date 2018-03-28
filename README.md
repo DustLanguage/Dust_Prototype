@@ -53,3 +53,13 @@ If you have any suggestions please open an issue or send a message in our
 
 As I said above contributions are more than welcome even if you don't have
 any experience in programming language design. If you're willing to contribute, take a look at [these](https://github.com/DustLanguage/Dust/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues.
+
+
+## Copyright
+This project is licensed under MIT license and uses some open-source projects. Their copyright/license information is below.
+
+
+Architecture and some small parts of the project are from another open-source project called [Sicola](https://github.com/GerardSmit/Sicola/). Their copyright information is below.
+- Copyright: Gerard Smit
+- License: MIT
+- License URL: https://github.com/GerardSmit/Sicola/blob/master/LICENSE
