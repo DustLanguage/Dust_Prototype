@@ -4,9 +4,9 @@ The MIT License (MIT)
 Copyright (c) 2018 
 
 Architecture and some small parts of the project are from another open-source project called [Sicola](https://github.com/GerardSmit/Sicola/). Their copyright information is below.
-    Copyright: Gerard Smit
-    License: MIT
-    License URL: https://github.com/GerardSmit/Sicola/blob/master/LICENSE
+- Copyright: Gerard Smit
+- License: MIT
+- License URL: https://github.com/GerardSmit/Sicola/blob/master/LICENSE
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
