@@ -10,14 +10,21 @@ namespace Dust.Compiler
   {
     public virtual string Name { get; } = "";
 
-    public DustContext CompilerContext { get; }
+    protected DustContext CompilerContext { get; }
 
-    public DustBaseCompiler(DustContext compilerContext)
+    protected DustBaseCompiler(DustContext compilerContext)
     {
       CompilerContext = compilerContext;
     }
 
-    public virtual T CompileModule(Module module)
+    public CompileResult<T> Compile(Module module)
+    {
+      T value = CompileModule(module);
+
+      return new CompileResult<T>(module, CompilerContext, value);
+    }
+
+    protected virtual T CompileModule(Module module)
     {
       return default(T);
     }
@@ -44,7 +51,7 @@ namespace Dust.Compiler
       return default(T);
     }
 
-    public T CompileExpression(Expression baseExpression)
+    protected T CompileExpression(Expression baseExpression)
     {
       switch (baseExpression)
       {
@@ -73,7 +80,7 @@ namespace Dust.Compiler
 
     #region Statements
 
-    public T CompileExpressionStatement(ExpressionStatement statement)
+    protected  T CompileExpressionStatement(ExpressionStatement statement)
     {
       return CompileExpression(statement.Expression);
     }

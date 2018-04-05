@@ -20,7 +20,7 @@ namespace Dust.Compiler
     {
     }
 
-    public override object CompileModule(Module module)
+    protected override object CompileModule(Module module)
     {
       return CompileStatements(module.Statements);
     }
