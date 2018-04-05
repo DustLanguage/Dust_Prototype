@@ -1,4 +1,5 @@
 ﻿using Dust.Language.Types;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes.Expressions
 {
@@ -7,5 +8,10 @@ namespace Dust.Language.Nodes.Expressions
     public virtual DustType Type => DustType.GetDustType(Value);
 
     public object Value { get; set; }
+
+    protected Expression(Range range)
+      : base(range)
+    {
+    }
   }
 }

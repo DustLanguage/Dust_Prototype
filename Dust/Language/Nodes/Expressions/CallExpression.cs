@@ -1,4 +1,5 @@
 ﻿using Dust.Language.Types;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes.Expressions
 {
@@ -8,7 +9,8 @@ namespace Dust.Language.Nodes.Expressions
     public CallParameter[] Parameters { get; }
     public override DustType Type => Function.ReturnType;
 
-    public CallExpression(Function function, CallParameter[] parameters)
+    public CallExpression(Function function, CallParameter[] parameters, Range range)
+      : base(range)
     {
       Function = function;
       Parameters = parameters;

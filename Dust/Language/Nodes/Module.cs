@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Dust.Language.Nodes.Statements;
+﻿using Dust.Language.Nodes.Statements;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes
 {
-  public class Module : Statement
+  public class Module : Node
   {
     public Statement[] Statements { get; }
     
-    public Module(IEnumerable<Statement> statements)
+    public Module(Statement[] statements, Range range)
+      : base(range)
     {
-      Statements = statements.ToArray();
+      Statements = statements;
     }
   }
 }

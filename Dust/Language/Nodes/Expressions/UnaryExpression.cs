@@ -1,4 +1,5 @@
 ﻿using Dust.Language.Types;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes.Expressions
 {
@@ -9,7 +10,8 @@ namespace Dust.Language.Nodes.Expressions
 
     public override DustType Type => Expression.Type;
 
-    public UnaryExpression(Expression expression, UnaryOperatorType @operator)
+    public UnaryExpression(Expression expression, UnaryOperatorType @operator, Range range)
+      : base(range)
     {
       Expression = expression;
       Operator = @operator;

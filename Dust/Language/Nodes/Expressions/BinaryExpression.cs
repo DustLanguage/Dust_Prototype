@@ -1,4 +1,5 @@
 ﻿using Dust.Language.Types;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes.Expressions
 {
@@ -21,7 +22,8 @@ namespace Dust.Language.Nodes.Expressions
       }
     }
 
-    public BinaryExpression(Expression left, BinaryOperatorType @operator, Expression right)
+    public BinaryExpression(Expression left, BinaryOperatorType @operator, Expression right, Range range)
+      : base(range)
     {
       Left = left;
       Operator = @operator;

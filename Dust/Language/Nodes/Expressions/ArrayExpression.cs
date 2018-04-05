@@ -1,4 +1,5 @@
 ﻿using Dust.Language.Types;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes.Expressions
 {
@@ -6,5 +7,10 @@ namespace Dust.Language.Nodes.Expressions
   {
     // Make this type array
     public override DustType Type => DustType.Array;
+
+    public ArrayExpression(Range range)
+      : base(range)
+    {
+    }
   }
 }

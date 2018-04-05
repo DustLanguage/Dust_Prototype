@@ -1,4 +1,5 @@
 ﻿using Dust.Language.Nodes.Expressions;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes
 {
@@ -6,7 +7,8 @@ namespace Dust.Language.Nodes
   {
     public Expression Expression { get; }
     
-    public CallParameter(Expression expression)
+    public CallParameter(Expression expression, Range range)
+      : base(range)
     {
       Expression = expression;
     }

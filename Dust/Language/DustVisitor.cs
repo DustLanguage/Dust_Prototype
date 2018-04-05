@@ -6,6 +6,7 @@ using Dust.Language.Nodes;
 using Dust.Language.Nodes.Expressions;
 using Dust.Language.Nodes.Statements;
 using Dust.Language.Types;
+using LanguageServer.Parameters;
 
 namespace Dust.Language
 {
@@ -23,34 +24,34 @@ namespace Dust.Language
     {
       IEnumerable<Node> nodes = context.statement().Select(Visit);
 
-      return new Module(nodes.Cast<Statement>());
+      return new Module(nodes.Cast<Statement>().ToArray(), context.GetRange());
     }
 
     public override Node VisitExpressionStatement(DustParser.ExpressionStatementContext context)
     {
       Expression expression = (Expression) Visit(context.expression());
 
-      return new ExpressionStatement(expression);
+      return new ExpressionStatement(expression, context.GetRange());
     }
 
     public override Node VisitString(DustParser.StringContext context)
     {
-      return LiteralExpression.ParseString(context.GetText());
+      return LiteralExpression.ParseString(context.GetText(), context.GetRange());
     }
 
     public override Node VisitInt(DustParser.IntContext context)
     {
-      return LiteralExpression.ParseInt(context.GetText());
+      return LiteralExpression.ParseInt(context.GetText(), context.GetRange());
     }
 
     public override Node VisitFloat(DustParser.FloatContext context)
     {
-      return LiteralExpression.ParseFloat(context.GetText());
+      return LiteralExpression.ParseFloat(context.GetText(), context.GetRange());
     }
 
     public override Node VisitBool(DustParser.BoolContext context)
     {
-      return LiteralExpression.ParseBool(context.GetText());
+      return LiteralExpression.ParseBool(context.GetText(), context.GetRange());
     }
 
     public override Node VisitBinaryExpression(DustParser.BinaryExpressionContext context)
@@ -136,11 +137,11 @@ namespace Dust.Language
         return null;
       }
 
-      IdentifierExpression identifier = new IdentifierExpression(name, isMutable);
+      IdentifierExpression identifier = new IdentifierExpression(name, isMutable, context.identifierName().GetRange());
 
       visitorContext.AddProperty(identifier);
 
-      return new PropertyDeclaration(initializer, identifier);
+      return new PropertyDeclaration(initializer, identifier, context.GetRange());
     }
 
     public override Node VisitFunctionParameter(DustParser.FunctionParameterContext context)
@@ -148,7 +149,7 @@ namespace Dust.Language
       string name = context.parameterName().GetText();
       bool isMutable = context.GetText().Contains("mut");
 
-      return new FunctionParameter(new IdentifierExpression(name, isMutable), null);
+      return new FunctionParameter(new IdentifierExpression(name, isMutable, context.parameterName().GetRange()), null, context.GetRange());
     }
 
     public override Node VisitFunctionDeclaration(DustParser.FunctionDeclarationContext context)
@@ -196,7 +197,11 @@ namespace Dust.Language
         }
       }
 
-      FunctionDeclaration declaration = new FunctionDeclaration(name, modifiers, parameters ?? new FunctionParameter[0], statements.ToArray(), returnType, child.visitorContext);
+      FunctionDeclaration declaration = new FunctionDeclaration(name, modifiers, parameters ?? new FunctionParameter[0], statements.ToArray(), returnType, child.visitorContext, new Range
+      {
+        Start = context.GetRange().Start,
+        End = context.functionDeclarationBase().functionName().GetRange().End
+      });
 
       visitorContext.AddFunction(declaration.Function);
 
@@ -207,12 +212,12 @@ namespace Dust.Language
     {
       Expression expression = (Expression) Visit(context.expression());
 
-      return new ReturnStatement(expression);
+      return new ReturnStatement(expression, context.GetRange());
     }
 
     public override Node VisitCallParameter(DustParser.CallParameterContext context)
     {
-      return new CallParameter((Expression) Visit(context.expression()));
+      return new CallParameter((Expression) Visit(context.expression()), context.GetRange());
     }
 
     public override Node VisitCallExpression(DustParser.CallExpressionContext context)
@@ -235,7 +240,7 @@ namespace Dust.Language
         return null;
       }
 
-      return new CallExpression(function, parameters);
+      return new CallExpression(function, parameters, context.GetRange());
     }
 
     public override Node VisitIdentifierExpression(DustParser.IdentifierExpressionContext context)
@@ -263,14 +268,14 @@ namespace Dust.Language
     {
       Expression expression = (Expression) Visit(context.expression());
 
-      return new TypeOfExpression(expression);
+      return new TypeOfExpression(expression, context.GetRange());
     }
 
     public override Node VisitGroupExpression(DustParser.GroupExpressionContext context)
     {
       Expression expression = (Expression) Visit(context.expression());
 
-      return new GroupExpression(expression);
+      return new GroupExpression(expression, context.GetRange());
     }
 
     private DustVisitor CreateChild(FunctionParameter[] predefindProperties)
@@ -301,7 +306,7 @@ namespace Dust.Language
         case BinaryOperatorType.BIGGER_EQUAL:
         case BinaryOperatorType.SMALLER:
         case BinaryOperatorType.SMALLER_EQUAL:
-          return new BinaryExpression(left, operatorType, right);
+          return new BinaryExpression(left, operatorType, right, context.GetRange());
       }
 
       if (left.Type == DustType.Number && right.Type == DustType.Number)
@@ -312,7 +317,7 @@ namespace Dust.Language
           case BinaryOperatorType.MINUS:
           case BinaryOperatorType.TIMES:
           case BinaryOperatorType.DIVIDE:
-            return new BinaryExpression(left, operatorType, right);
+            return new BinaryExpression(left, operatorType, right, context.GetRange());
         }
       }
 
@@ -323,7 +328,7 @@ namespace Dust.Language
         {
           case BinaryOperatorType.PLUS:
           case BinaryOperatorType.TIMES:
-            return new BinaryExpression(left, operatorType, right);
+            return new BinaryExpression(left, operatorType, right, context.GetRange());
         }
       }
 
@@ -351,7 +356,7 @@ namespace Dust.Language
         return null;
       }
 
-      return new AssignmentExpression(left, right);
+      return new AssignmentExpression(left, right, context.GetRange());
     }
 
     private UnaryExpression CreateUnaryExpression(DustParser.ExpressionContext context, DustParser.ExpressionContext expressionContext, string @operator)
@@ -365,7 +370,7 @@ namespace Dust.Language
         switch (operatorType)
         {
           case UnaryOperatorType.DELETE:
-            return new UnaryExpression(expression, operatorType);
+            return new UnaryExpression(expression, operatorType, context.GetRange());
         }
       }
 
@@ -377,7 +382,7 @@ namespace Dust.Language
           case UnaryOperatorType.MINUS_MINUS:
           case UnaryOperatorType.TIMES_TIMES:
           case UnaryOperatorType.DIVIDE_DIVIDE:
-            return new UnaryExpression(expression, operatorType);
+            return new UnaryExpression(expression, operatorType, context.GetRange());
         }
       }
 
@@ -386,7 +391,7 @@ namespace Dust.Language
         switch (operatorType)
         {
           case UnaryOperatorType.BANG:
-            return new UnaryExpression(expression, operatorType);
+            return new UnaryExpression(expression, operatorType, context.GetRange());
         }
       }
 

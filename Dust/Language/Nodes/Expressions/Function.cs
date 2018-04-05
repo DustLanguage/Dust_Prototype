@@ -1,5 +1,6 @@
 ﻿using Dust.Language.Nodes.Statements;
 using Dust.Language.Types;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes.Expressions
 {
@@ -14,7 +15,8 @@ namespace Dust.Language.Nodes.Expressions
 
     public override DustType Type => DustType.Function;
 
-    public Function(string name, FunctionModifier[] modifiers, FunctionParameter[] parameters, Statement[] statements, DustType returnType, DustContext context)
+    public Function(string name, FunctionModifier[] modifiers, FunctionParameter[] parameters, Statement[] statements, DustType returnType, DustContext context, Range range)
+      : base(range)
     {
       Name = name;
       Parameters = parameters;

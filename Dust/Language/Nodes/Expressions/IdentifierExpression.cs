@@ -1,4 +1,5 @@
 ﻿using System;
+using LanguageServer.Parameters;
 
 namespace Dust.Language.Nodes.Expressions
 {
@@ -7,11 +8,12 @@ namespace Dust.Language.Nodes.Expressions
     public string Name { get; }
     public bool IsMutable { get; }
 
-    public IdentifierExpression(string name, bool isMutable)
+    public IdentifierExpression(string name, bool isMutable, Range range)
+      : base(range)
     {
       Name = name;
       IsMutable = isMutable;
-      Value = null; //TODO ?? 
+      Value = null; 
     }
 
     public bool Equals(IdentifierExpression other)
