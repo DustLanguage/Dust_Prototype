@@ -47,7 +47,7 @@ namespace Dust.Language
 
     public bool ContainsPropety(string name)
     {
-      return Properties.Get(element => element.Name == name) != null;
+      return GetProperty(name) != null;
     }
 
     public void DeleteProperty(IdentifierExpression property)
