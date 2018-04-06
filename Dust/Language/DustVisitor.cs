@@ -17,7 +17,6 @@ namespace Dust.Language
     public DustVisitor(DustContext visitorContext)
     {
       this.visitorContext = visitorContext;
-      visitorContext.ErrorHandler.Clear();
     }
 
     public override Node VisitModule(DustParser.ModuleContext context)
