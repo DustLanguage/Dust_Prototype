@@ -29,7 +29,7 @@ namespace Dust.CLI
         DustVisitor visitor = new DustVisitor(context);
         Module module = (Module) visitor.VisitModule(parser.module());
 
-        object result = compiler.CompileModule(module);
+        object result = compiler.Compile(module).Value;
 
         bool hasErrored = false;
         
@@ -44,7 +44,6 @@ namespace Dust.CLI
         {
           Console.WriteLine(result);
         }
-
       }
     }
   }
